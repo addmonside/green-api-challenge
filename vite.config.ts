@@ -6,13 +6,17 @@ import mkcert from 'vite-plugin-mkcert'
 import createSvgSpritePlugin from 'vite-plugin-svg-sprite'
 import path from 'node:path'
 
+import tailwindcss from '@tailwindcss/vite'
 const dirname = import.meta.dirname
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react(),
-    babel({ presets: [reactCompilerPreset()] }),
+    tailwindcss(),
+    babel({
+      presets: [reactCompilerPreset()],
+    }),
     createSvgSpritePlugin({
       exportType: 'react',
       include: '**/assets/icons/**/*.svg',
@@ -61,8 +65,11 @@ export default defineConfig({
     }),
     mkcert({
       savePath: './.tls',
-    }), // generating certificates for https://localhost
-    checker({ typescript: true, biome: true }), // ts type checking
+    }),
+    checker({
+      typescript: true,
+      biome: true,
+    }),
   ],
   server: {
     host: 'localhost',
