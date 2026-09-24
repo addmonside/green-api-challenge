@@ -9,7 +9,9 @@
     "preview": "vite preview",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
-    "format": "biome format --write ."
+    "format": "biome format --write .",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
@@ -29,18 +31,29 @@
   "devDependencies": {
     "@babel/core": "^7.29.7",
     "@biomejs/biome": "^2.5.14",
+    "@chromatic-com/storybook": "latest",
     "@rolldown/plugin-babel": "^0.2.4",
+    "@storybook/addon-a11y": "^10.6.0",
+    "@storybook/addon-docs": "^10.6.0",
+    "@storybook/addon-mcp": "^10.6.0",
+    "@storybook/addon-vitest": "^10.6.0",
+    "@storybook/react-vite": "^10.6.0",
     "@tailwindcss/vite": "^4.3.3",
     "@types/babel__core": "^7.20.5",
     "@types/node": "^24.13.3",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.1",
+    "@vitest/browser-playwright": "latest",
+    "@vitest/coverage-v8": "latest",
     "babel-plugin-react-compiler": "^1.0.0",
+    "playwright": "latest",
+    "storybook": "^10.6.0",
     "typescript": "~6.0.2",
     "vite": "^8.3.1",
     "vite-plugin-checker": "^0.14.5",
     "vite-plugin-mkcert": "^2.1.0",
-    "vite-plugin-svg-sprite": "^0.7.1"
+    "vite-plugin-svg-sprite": "^0.7.1",
+    "vitest": "latest"
   }
 }
