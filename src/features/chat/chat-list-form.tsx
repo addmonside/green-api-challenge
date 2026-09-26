@@ -6,28 +6,30 @@ import { useChatListForm } from './use-chat-list-form'
 export function ChatListForm() {
   const { form } = useChatListForm()
   return (
-    <Card>
-      <CardContent>
-        <Form form={form}>
-          <Form.Field name="recipient" label="Номер получателя">
-            {(field) => (
-              <Input
-                id={field.name}
-                value={field.state.value}
-                onChange={(event) => field.handleChange(event.target.value)}
-                onBlur={field.handleBlur}
-                placeholder="79999999999"
-                autoComplete="off"
-                aria-invalid={!field.state.meta.isValid}
-              />
-            )}
-          </Form.Field>
+    <div className="flex-1 grid place-items-center">
+      <Card className="w-full max-w-sm">
+        <CardContent>
+          <Form form={form}>
+            <Form.Field name="recipient" label="Номер получателя">
+              {(field) => (
+                <Input
+                  id={field.name}
+                  value={field.state.value}
+                  onChange={(event) => field.handleChange(event.target.value)}
+                  onBlur={field.handleBlur}
+                  placeholder="79999999999"
+                  autoComplete="off"
+                  aria-invalid={!field.state.meta.isValid}
+                />
+              )}
+            </Form.Field>
 
-          <Form.Error title="Не удалось открыть чат" />
+            <Form.Error title="Не удалось открыть чат" />
 
-          <Form.Submit pendingLabel="Открытие…">Открыть</Form.Submit>
-        </Form>
-      </CardContent>
-    </Card>
+            <Form.Submit pendingLabel="Открытие…">Открыть</Form.Submit>
+          </Form>
+        </CardContent>
+      </Card>
+    </div>
   )
 }
