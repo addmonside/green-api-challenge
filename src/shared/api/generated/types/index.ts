@@ -1,6 +1,8 @@
 export type { ApiError } from './ApiError'
 export type { ChatHistoryMessage } from './ChatHistoryMessage'
 export type { ChatListItem } from './ChatListItem'
+export type { CheckAccountBody, CheckAccountOptions, CheckAccountPath, CheckAccountResponse, CheckAccountResponses, CheckAccountStatus200, CheckAccountStatus400 } from './CheckAccount'
+export type { CheckAccountRequest } from './CheckAccountRequest'
 export type { DeleteNotificationOptions, DeleteNotificationPath, DeleteNotificationResponse, DeleteNotificationResponses, DeleteNotificationStatus200 } from './DeleteNotification'
 export type { GetAccountSettingsOptions, GetAccountSettingsPath, GetAccountSettingsResponse, GetAccountSettingsResponses, GetAccountSettingsStatus200 } from './GetAccountSettings'
 export type { GetChatHistoryBody, GetChatHistoryOptions, GetChatHistoryPath, GetChatHistoryResponse, GetChatHistoryResponses, GetChatHistoryStatus200, GetChatHistoryStatus400 } from './GetChatHistory'

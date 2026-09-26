@@ -3,8 +3,8 @@ import { Card, CardContent } from '@/shared/ui/kit/card'
 import { Input } from '@/shared/ui/kit/input'
 import { useChatListForm } from './use-chat-list-form'
 
-export function ChatListForm({ onSubmit }: { onSubmit: (recipient: string) => void }) {
-  const { form } = useChatListForm(onSubmit)
+export function ChatListForm() {
+  const { form } = useChatListForm()
   return (
     <Card>
       <CardContent>
@@ -22,6 +22,8 @@ export function ChatListForm({ onSubmit }: { onSubmit: (recipient: string) => vo
               />
             )}
           </Form.Field>
+
+          <Form.Error title="Не удалось открыть чат" />
 
           <Form.Submit pendingLabel="Открытие…">Открыть</Form.Submit>
         </Form>

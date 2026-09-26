@@ -1,3 +1,4 @@
+export { checkAccount } from './checkAccount'
 export { deleteNotification } from './deleteNotification'
 export { getAccountSettings } from './getAccountSettings'
 export { getChatHistory } from './getChatHistory'

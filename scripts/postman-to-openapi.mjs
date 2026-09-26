@@ -35,6 +35,10 @@ const operations = [
     operationId: 'getChats',
     path: ['Сервисные методы', 'Получить список чатов'],
   },
+  {
+    operationId: 'checkAccount',
+    path: ['Сервисные методы', 'Проверить наличие Telegram'],
+  },
 ]
 
 const instanceParam = 'idInstance'
@@ -189,6 +193,21 @@ const schemas = {
     },
     required: ['chatId', 'phoneNumber'],
   },
+  CheckAccountRequest: {
+    type: 'object',
+    properties: {
+      phoneNumber: { type: 'number' },
+    },
+    required: ['phoneNumber'],
+  },
+  CheckAccountResponse: {
+    type: 'object',
+    properties: {
+      exist: { type: 'boolean' },
+      chatId: { type: 'string' },
+    },
+    required: ['exist', 'chatId'],
+  },
 }
 
 const responseSchemas = {
@@ -200,11 +219,13 @@ const responseSchemas = {
   },
   getAccountSettings: { 200: 'GetAccountSettingsResponse' },
   getChats: { 200: { type: 'array', items: { $ref: '#/components/schemas/ChatListItem' } } },
+  checkAccount: { 200: 'CheckAccountResponse' },
 }
 
 const requestBodySchemas = {
   sendMessage: 'SendMessageRequest',
   getChatHistory: 'GetChatHistoryRequest',
+  checkAccount: 'CheckAccountRequest',
 }
 
 // Ответы 200 разворачиваются inline (см. applySchemaOverrides), поэтому одноимённые

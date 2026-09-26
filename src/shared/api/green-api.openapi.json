@@ -347,6 +347,73 @@
         },
         "operationId": "getChats"
       }
+    },
+    "/waInstance{idInstance}/checkAccount/{apiTokenInstance}": {
+      "post": {
+        "summary": "Проверить наличие Telegram",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CheckAccountRequest"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "idInstance",
+            "required": true,
+            "description": "Идентификатор инстанса GREEN-API (из личного кабинета)",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apiTokenInstance",
+            "required": true,
+            "description": "API-токен инстанса (из личного кабинета)",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешный ответ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "exist": {
+                      "type": "boolean"
+                    },
+                    "chatId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["exist", "chatId"]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка валидации или выполнения запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "checkAccount"
+      }
     }
   },
   "components": {
@@ -539,6 +606,15 @@
           }
         },
         "required": ["chatId", "phoneNumber"]
+      },
+      "CheckAccountRequest": {
+        "type": "object",
+        "properties": {
+          "phoneNumber": {
+            "type": "number"
+          }
+        },
+        "required": ["phoneNumber"]
       }
     }
   },
