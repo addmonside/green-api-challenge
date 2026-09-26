@@ -3,7 +3,7 @@ import { Layout } from '@/shared/ui/layout'
 
 export function AuthLayout() {
   return (
-    <Layout variant="auth">
+    <Layout variant="centered">
       <Outlet />
     </Layout>
   )

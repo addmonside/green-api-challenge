@@ -11,6 +11,7 @@ export const makeRouter = (app: React.ReactNode) =>
           index: true,
           lazy: () => import('./router-guard'),
         },
+        // авторизация
         {
           lazy: () => import('./router-private-guard'),
           children: [
@@ -29,17 +30,32 @@ export const makeRouter = (app: React.ReactNode) =>
             },
           ],
         },
+        // аутенетификация
         {
           lazy: () => import('./router-auth-guard'),
           children: [
             {
-              lazy: async () => import('@/features/auth/auth-layout'),
+              lazy: async () => import('@/features/utility/centered-layout'),
               children: [
                 {
                   path: routes.AUTH,
                   lazy: async () => import('@/features/auth/login-page'),
                 },
               ],
+            },
+          ],
+        },
+        // общие страницы
+        {
+          lazy: async () => import('@/features/utility/centered-layout'),
+          children: [
+            {
+              path: routes.getError(':codeId'),
+              lazy: async () => import('@/features/utility/error-page'),
+            },
+            {
+              path: '*',
+              lazy: async () => import('@/features/utility/error-page'),
             },
           ],
         },
