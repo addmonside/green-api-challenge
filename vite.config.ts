@@ -1,10 +1,13 @@
+import path from 'node:path'
 import babel from '@rolldown/plugin-babel'
+import { storybookTest } from '@storybook/addon-vitest/vitest-plugin'
+import tailwindcss from '@tailwindcss/vite'
 import react, { reactCompilerPreset } from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
+import { playwright } from '@vitest/browser-playwright'
 import checker from 'vite-plugin-checker'
 import mkcert from 'vite-plugin-mkcert'
 import createSvgSpritePlugin from 'vite-plugin-svg-sprite'
-import path from 'node:path'
+import { defineConfig } from 'vitest/config'
 
 const dirname = import.meta.dirname
 
@@ -12,7 +15,10 @@ const dirname = import.meta.dirname
 export default defineConfig({
   plugins: [
     react(),
-    babel({ presets: [reactCompilerPreset()] }),
+    tailwindcss(),
+    babel({
+      presets: [reactCompilerPreset()],
+    }),
     createSvgSpritePlugin({
       exportType: 'react',
       include: '**/assets/icons/**/*.svg',
@@ -61,8 +67,11 @@ export default defineConfig({
     }),
     mkcert({
       savePath: './.tls',
-    }), // generating certificates for https://localhost
-    checker({ typescript: true, biome: true }), // ts type checking
+    }),
+    checker({
+      typescript: true,
+      biome: true,
+    }),
   ],
   server: {
     host: 'localhost',
@@ -75,5 +84,32 @@ export default defineConfig({
       '@': path.resolve(dirname, './src'),
     },
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+  },
+  test: {
+    projects: [
+      {
+        extends: true,
+        plugins: [
+          // The plugin will run tests for the stories defined in your Storybook config
+          // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
+          storybookTest({
+            configDir: path.join(dirname, '.storybook'),
+          }),
+        ],
+        test: {
+          name: 'storybook',
+          browser: {
+            enabled: true,
+            headless: true,
+            provider: playwright({}),
+            instances: [
+              {
+                browser: 'chromium',
+              },
+            ],
+          },
+        },
+      },
+    ],
   },
 })

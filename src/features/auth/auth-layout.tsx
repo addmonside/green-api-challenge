@@ -1,10 +1,11 @@
-import { Outlet } from "react-router"
+import { Outlet } from 'react-router'
 
 export function AuthLayout() {
-  return <>
-    <p>Auth layout</p>
-    <Outlet />
-  </>
+  return (
+    <div className="min-h-svh flex flex-col items-center justify-center">
+      <Outlet />
+    </div>
+  )
 }
 
 export const Component = AuthLayout
