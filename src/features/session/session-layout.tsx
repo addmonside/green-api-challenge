@@ -1,10 +1,11 @@
 import { Outlet } from 'react-router'
+import { Layout } from '@/shared/ui/layout'
 
 export function SessionLayout() {
   return (
-    <div className="min-h-svh flex flex-col">
+    <Layout>
       <Outlet />
-    </div>
+    </Layout>
   )
 }
 
