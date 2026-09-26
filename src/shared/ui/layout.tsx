@@ -5,7 +5,7 @@ const layoutVariants = cva('@container/page-layout', {
   variants: {
     variant: {
       default: 'min-h-svh flex flex-col',
-      auth: 'min-h-svh flex flex-col items-center justify-center',
+      centered: 'min-h-svh flex flex-col items-center justify-center',
     },
   },
   defaultVariants: {

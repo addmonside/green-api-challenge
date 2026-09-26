@@ -18,7 +18,7 @@ export type GetAccountSettingsPath = {
 
 export type GetAccountSettingsStatus200 = {
     avatar?: string;
-    phone?: number;
+    phone?: string;
     stateInstance: string;
     chatId?: string;
     historySyncProgress?: number;
