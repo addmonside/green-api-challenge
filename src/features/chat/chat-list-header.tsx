@@ -7,7 +7,7 @@ export function ChatListHeader() {
   const { signOut } = useCredentials()
   return (
     <>
-      <Button variant="ghost-icon" onClick={signOut}>
+      <Button variant="ghost-icon" aria-label="Выйти" onClick={signOut}>
         <ArrowLeftIcon />
       </Button>
       <Text as="h1" variant="chat-header-title" className="flex-1">

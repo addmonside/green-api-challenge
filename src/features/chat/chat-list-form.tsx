@@ -18,7 +18,7 @@ export function ChatListForm() {
                   onChange={(event) => field.handleChange(event.target.value)}
                   onBlur={field.handleBlur}
                   placeholder="79999999999"
-                  autoComplete="off"
+                  autoComplete="phone"
                   aria-invalid={!field.state.meta.isValid}
                 />
               )}

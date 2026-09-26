@@ -8,7 +8,7 @@ const toPath = (credentials: Credentials) => ({
   apiTokenInstance: credentials.apiTokenInstance,
 })
 
-export const checkAccount = async (
+export const checkContact = async (
   credentials: Credentials,
   phoneNumber: number,
   signal?: AbortSignal,

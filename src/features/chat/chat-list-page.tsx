@@ -10,7 +10,6 @@ function ChatListPage() {
         <ChatListHeader />
       </PageLayout.Header>
       <PageLayout.Content>
-        <ChatListForm onSubmit={openChat} />
         <ChatListForm />
       </PageLayout.Content>
     </PageLayout>
