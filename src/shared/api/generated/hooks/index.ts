@@ -2,4 +2,5 @@ export { checkAccountMutationKey, checkAccountMutationOptions, useCheckAccount }
 export { getAccountSettingsQueryKey, getAccountSettingsQueryOptions, useGetAccountSettings } from './useGetAccountSettings'
 export { getChatHistoryQueryKey, getChatHistoryQueryOptions, useGetChatHistory } from './useGetChatHistory'
 export { getChatsQueryKey, getChatsQueryOptions, useGetChats } from './useGetChats'
+export { getContactInfoQueryKey, getContactInfoQueryOptions, useGetContactInfo } from './useGetContactInfo'
 export { sendMessageMutationKey, sendMessageMutationOptions, useSendMessage } from './useSendMessage'

@@ -8,6 +8,8 @@ export { getAccountSettingsPathApiTokenInstanceSchema, getAccountSettingsPathIdI
 export { getChatHistoryRequestSchema } from './getChatHistoryRequestSchema'
 export { getChatHistoryBodySchema, getChatHistoryErrorSchema, getChatHistoryPathApiTokenInstanceSchema, getChatHistoryPathIdInstanceSchema, getChatHistoryResponseSchema, getChatHistoryStatus200Schema, getChatHistoryStatus400Schema } from './getChatHistorySchema'
 export { getChatsPathApiTokenInstanceSchema, getChatsPathIdInstanceSchema, getChatsResponseSchema, getChatsStatus200Schema } from './getChatsSchema'
+export { getContactInfoRequestSchema } from './getContactInfoRequestSchema'
+export { getContactInfoBodySchema, getContactInfoErrorSchema, getContactInfoPathApiTokenInstanceSchema, getContactInfoPathIdInstanceSchema, getContactInfoResponseSchema, getContactInfoStatus200Schema, getContactInfoStatus400Schema } from './getContactInfoSchema'
 export { notificationBodySchema } from './notificationBodySchema'
 export { notificationInstanceDataSchema } from './notificationInstanceDataSchema'
 export { notificationMessageDataSchema } from './notificationMessageDataSchema'

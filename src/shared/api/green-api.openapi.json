@@ -414,6 +414,85 @@
         },
         "operationId": "checkAccount"
       }
+    },
+    "/waInstance{idInstance}/GetContactInfo/{apiTokenInstance}": {
+      "post": {
+        "summary": "Получить инфо контакта",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetContactInfoRequest"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "idInstance",
+            "required": true,
+            "description": "Идентификатор инстанса GREEN-API (из личного кабинета)",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apiTokenInstance",
+            "required": true,
+            "description": "API-токен инстанса (из личного кабинета)",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешный ответ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "avatar": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "contactName": {
+                      "type": "string"
+                    },
+                    "chatId": {
+                      "type": "string"
+                    },
+                    "lastSeen": {
+                      "type": "number"
+                    },
+                    "phoneNumber": {
+                      "type": "number"
+                    }
+                  },
+                  "required": ["chatId"]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка валидации или выполнения запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getContactInfo"
+      }
     }
   },
   "components": {
@@ -615,6 +694,15 @@
           }
         },
         "required": ["phoneNumber"]
+      },
+      "GetContactInfoRequest": {
+        "type": "object",
+        "properties": {
+          "chatId": {
+            "type": "string"
+          }
+        },
+        "required": ["chatId"]
       }
     }
   },

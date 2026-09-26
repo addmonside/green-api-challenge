@@ -28,6 +28,14 @@ export default defineConfig({
             query: { methods: ['POST'], importPath: '@tanstack/react-query' },
           },
         },
+        {
+          type: 'operationId',
+          pattern: 'getContactInfo',
+          options: {
+            mutation: false,
+            query: { methods: ['POST'], importPath: '@tanstack/react-query' },
+          },
+        },
       ],
       // Long-poll и подтверждение receiptId вызываются вручную (use-notification-poller).
       exclude: [

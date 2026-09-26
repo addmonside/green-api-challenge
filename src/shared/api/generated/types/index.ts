@@ -8,6 +8,8 @@ export type { GetAccountSettingsOptions, GetAccountSettingsPath, GetAccountSetti
 export type { GetChatHistoryBody, GetChatHistoryOptions, GetChatHistoryPath, GetChatHistoryResponse, GetChatHistoryResponses, GetChatHistoryStatus200, GetChatHistoryStatus400 } from './GetChatHistory'
 export type { GetChatHistoryRequest } from './GetChatHistoryRequest'
 export type { GetChatsOptions, GetChatsPath, GetChatsResponse, GetChatsResponses, GetChatsStatus200 } from './GetChats'
+export type { GetContactInfoBody, GetContactInfoOptions, GetContactInfoPath, GetContactInfoResponse, GetContactInfoResponses, GetContactInfoStatus200, GetContactInfoStatus400 } from './GetContactInfo'
+export type { GetContactInfoRequest } from './GetContactInfoRequest'
 export type { NotificationBody } from './NotificationBody'
 export type { NotificationInstanceData } from './NotificationInstanceData'
 export type { NotificationMessageData } from './NotificationMessageData'
