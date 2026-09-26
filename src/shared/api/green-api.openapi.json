@@ -286,7 +286,7 @@
                       "type": "string"
                     },
                     "phone": {
-                      "type": "number"
+                      "type": "string"
                     },
                     "stateInstance": {
                       "type": "string"

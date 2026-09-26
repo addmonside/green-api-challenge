@@ -174,7 +174,7 @@ const schemas = {
     type: 'object',
     properties: {
       avatar: { type: 'string' },
-      phone: { type: 'number' },
+      phone: { type: 'string' },
       stateInstance: { type: 'string' },
       chatId: { type: 'string' },
       historySyncProgress: { type: 'number' },

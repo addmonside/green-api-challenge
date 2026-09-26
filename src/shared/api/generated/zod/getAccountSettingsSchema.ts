@@ -11,7 +11,7 @@ export const getAccountSettingsPathApiTokenInstanceSchema = z.string().describe(
 
 export const getAccountSettingsStatus200Schema = z.object({
   avatar: z.string().optional(),
-  phone: z.number().optional(),
+  phone: z.string().optional(),
   stateInstance: z.string(),
   chatId: z.string().optional(),
   historySyncProgress: z.number().optional(),

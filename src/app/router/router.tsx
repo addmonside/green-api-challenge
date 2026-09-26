@@ -8,20 +8,38 @@ export const makeRouter = (app: React.ReactNode) =>
       element: app,
       children: [
         {
-          lazy: () => import('@/features/session/session-layout'),
+          index: true,
+          lazy: () => import('./router-guard'),
+        },
+        {
+          lazy: () => import('./router-private-guard'),
           children: [
             {
-              path: routes.CHAT,
-              lazy: async () => import('@/features/chat/chat-page'),
+              lazy: () => import('@/features/session/session-layout'),
+              children: [
+                {
+                  path: routes.CHAT_LIST,
+                  lazy: async () => import('@/features/chat/chat-list-page'),
+                },
+                {
+                  path: routes.CHAT,
+                  lazy: async () => import('@/features/messages/message-list-page'),
+                },
+              ],
             },
           ],
         },
         {
-          lazy: async () => import('@/features/auth/auth-layout'),
+          lazy: () => import('./router-auth-guard'),
           children: [
             {
-              path: routes.AUTH,
-              lazy: async () => import('@/features/auth/login-page'),
+              lazy: async () => import('@/features/auth/auth-layout'),
+              children: [
+                {
+                  path: routes.AUTH,
+                  lazy: async () => import('@/features/auth/login-page'),
+                },
+              ],
             },
           ],
         },

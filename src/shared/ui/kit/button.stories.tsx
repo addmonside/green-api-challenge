@@ -19,18 +19,6 @@ export const Primary: Story = {
   },
 }
 
-export const Secondary: Story = {
-  args: { children: 'Secondary', variant: 'secondary' },
-}
-
-export const Destructive: Story = {
-  args: { children: 'Delete chat', variant: 'destructive' },
-}
-
-export const Outline: Story = {
-  args: { children: 'Outline', variant: 'outline' },
-}
-
 export const Ghost: Story = {
   args: { children: 'Ghost', variant: 'ghost' },
 }
@@ -39,24 +27,24 @@ export const GhostPrimary: Story = {
   args: { children: 'Ghost primary', variant: 'ghost-primary' },
 }
 
-export const Link: Story = {
-  args: { children: 'Go to chat', variant: 'link' },
-}
-
 export const Success: Story = {
   args: { children: 'Saved', variant: 'success' },
 }
 
+export const GhostIcon: Story = {
+  args: { children: <Send aria-hidden />, 'aria-label': 'Send message', variant: 'ghost-icon' },
+}
+
+export const ChatSend: Story = {
+  args: { children: <Send aria-hidden />, 'aria-label': 'Send message', variant: 'chat-send' },
+}
+
 export const Small: Story = {
-  args: { children: 'Small', size: 'sm' },
+  args: { children: 'Small', className: 'h-8 px-3 text-xs' },
 }
 
 export const Large: Story = {
-  args: { children: 'Large', size: 'lg' },
-}
-
-export const Icon: Story = {
-  args: { children: <Send aria-hidden />, 'aria-label': 'Send message', size: 'icon' },
+  args: { children: 'Large', className: 'h-12 px-6 text-base' },
 }
 
 export const Disabled: Story = {
