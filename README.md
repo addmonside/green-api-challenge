@@ -31,10 +31,10 @@
 
 ### ESLint + Prettier or Biome
 
-Выбрана связка ESLint + Prettier из-за зрелости.
+Выбран Biome (lint + формат + тайпчек в dev-сервере через vite-plugin-checker).
 
-- **Жертвуем:** Огромной экосистемой правил, проверенную годами стабильность, поддержку любых экспериментальных фич JS/TS, максимальную гибкость кастомизации
-- **Получаем:** скорость работы, одну зависимость вместо двух + дополнительные зависимости правил, простоту конфигурации
+- **Жертвуем:** Огромной экосистемой правил ESLint, проверенной годами стабильностью, поддержкой любых экспериментальных фич JS/TS, максимальной гибкостью кастомизации
+- **Получаем:** скорость работы, одну зависимость вместо ESLint + Prettier, единый конфиг, проверку TS и линта прямо в dev-оверлее
 
 ### React Router or TanStack Router
 
@@ -68,8 +68,8 @@
 Установка зависимостей и запуск
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 Открой [https://localhost:3000](https://localhost:3000) для просмотра результата.
@@ -83,31 +83,38 @@ npm run dev
 Запуск разработки
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 Сборка проекта
 
 ```bash
-npm run build
+pnpm build
 ```
 
-Старт сервера
+Превью продакшен-сборки
 
 ```bash
-npm run start
+pnpm preview
 ```
 
-Проверка и автофикс кода
+Проверка кода
 
 ```bash
-npm run lint
+pnpm lint
 ```
 
-Генерация типов и хуков из схемы
+Автофикс кода и форматирование
 
 ```bash
-npm run gen:api
+pnpm lint:fix
+pnpm format
+```
+
+Storybook (порт 6006)
+
+```bash
+pnpm storybook
 ```
 
 ---
@@ -139,12 +146,12 @@ src/
 
 - Один файл — один именованный экспорт компонента (исключая составные компоненты)
 - Aliases обязательны для всех файлов с расширением .tsx, никакого `../../../../`
-- index.ts — только для реэкспорта
+- index.ts — только для реэкспорта за исключением shared/ui/kit
 - Все хуки именуются как `useSomething`
-- Все стили — через app/index.css, Tailwind
-- Строгий ESLint. Все автофиксы можно прогнать через `npm run lint`
-- SVG иконки кладём в папку `shared/assets/...`
-- Используй clsx для динамических вариантов
+- Все стили — через Tailwind, глобальные стили в `src/app/app.css`
+- Строгий Biome. Автофиксы — `pnpm lint:fix`, форматирование — `pnpm format`
+- SVG-иконки кладём в `src/assets/icons/` — vite-plugin-svg-sprite превращает их в React-компоненты
+- Используй `cn` (реэкспорт из `shared/lib/utils`) для динамических вариантов
 - Не забывать про public api
 
 ---
@@ -182,18 +189,18 @@ type(feature): description
 - [vite](https://vitejs.dev/) — сборщик
 - [typescript](https://www.typescriptlang.org/) — строгая типизация
 
-<!--- [zod](https://zod.dev/) — проверка типов.-->
-
-<!--- [tailwindcss](https://tailwindcss.com/) — утилитарный CSS
-- [ShadCN](https://ui.shadcn.com/) — библеотека компонентов.-->
-
 - [react](https://react.dev/) — современный React с hooks
 - [react router](https://reactrouter.com/) — роутинг
 
+- [tailwindcss](https://tailwindcss.com/) — утилитарный CSS
+- [ShadCN](https://ui.shadcn.com/) — библеотека компонентов
+
 <!--- [react hook form](https://react-hook-form.com/) — формы
 - [tan stack query](https://tanstack.com/query/latest/) — работа с запросами
-- [zustand](https://zustand.docs.pmnd.rs/getting-started/introduction) — менеджер состояния-->
+- [yotai](https://...) — менеджер состояния-->
 
 - [biome](https://biomejs.dev/) — линтер JS/TS-кода
+- [storybook](https://storybook.js.org/) — документация и визуальное тестирование компонентов
 
-<!--- [storybook](https://storybook.js.org/) — документация и тестирование компонентов-->
+<!--- [vitest](https://storybook.js.org/) — тестирование -->
+<!--- [playwright](https://storybook.js.org/) — E2E тестирование -->

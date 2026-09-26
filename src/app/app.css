@@ -31,6 +31,8 @@
   --color-destructive: var(--destructive);
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
+  --color-bubble-out: var(--bubble-out);
+  --color-bubble-out-foreground: var(--bubble-out-foreground);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
@@ -62,6 +64,7 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.321 0 0);
   --primary: oklch(0.589 0.154 253.336); /* #2d7ed5 primary-color */
+  --primary-hover: oklch(0.56 0.15 253.5); /* #2874c6 primary-color */
   --primary-foreground: oklch(1 0 0); /* #FFFFFF message-out-primary-color */
   --secondary: oklch(0.955 0 0); /* #F0F0F0 message-background-color */
   --secondary-foreground: oklch(0.321 0 0);
@@ -72,6 +75,8 @@
   --destructive: oklch(0.605 0.197 25.004); /* #DF3F40 danger-color */
   --success: oklch(0.648 0.199 145.672); /* #04AC35 green-color (кастомный токен) */
   --success-foreground: oklch(1 0 0);
+  --bubble-out: oklch(0.945 0.028 248.12); /* #DFEFFF фон исходящего сообщения (light) */
+  --bubble-out-foreground: oklch(0.321 0 0); /* #333333, текст тёмный на светлом фоне */
   --border: oklch(0.909 0.006 264.531); /* #DFE1E5 border-color */
   --input: oklch(0.909 0.006 264.531);
   --ring: oklch(0.589 0.154 253.336); /* = primary, фокус-кольцо */
@@ -89,6 +94,13 @@
   --sidebar-accent-foreground: oklch(0.589 0.154 253.336);
   --sidebar-border: oklch(0.909 0.006 264.531);
   --sidebar-ring: oklch(0.589 0.154 253.336);
+  /* Градиент фона чата — 4 стопа, взят из настроек фона Telegram (data-colors на GradientCanvas) */
+  --bg-gradient-1: oklch(0.878 0.057 228.5); /* #b1e0fa */
+  --bg-gradient-2: oklch(0.734 0.081 240.1); /* #82b0d8 */
+  --bg-gradient-3: oklch(0.847 0.071 227.9); /* #a0d8e8 */
+  --bg-gradient-4: oklch(0.951 0.019 235.7); /* #e5f0f8 */
+  --bg-vignette: rgba(0, 0, 0, 0.12); /* лёгкое затемнение центра для light */
+  --bg-mask-opacity: 0.06;
 }
 
 .dark {
@@ -109,6 +121,8 @@
   --destructive: oklch(0.687 0.202 23.805); /* #ff595a danger-color */
   --success: oklch(0.745 0.176 143.879); /* #5CC85E green-color */
   --success-foreground: oklch(0.209 0 0);
+  --bubble-out: var(--primary); /* в dark исходящий = сплошной primary #8774e1 */
+  --bubble-out-foreground: var(--primary-foreground);
   --border: oklch(0.168 0 0); /* #0f0f0f border-color */
   --input: oklch(0.168 0 0);
   --ring: oklch(0.627 0.159 288.963);
@@ -125,6 +139,13 @@
   --sidebar-accent-foreground: oklch(0.627 0.159 288.963);
   --sidebar-border: oklch(0.168 0 0);
   --sidebar-ring: oklch(0.627 0.159 288.963);
+  /* Градиент фона чата (dark) */
+  --bg-gradient-1: oklch(0.526 0.174 288.347); /* #6a52c7 */
+  --bg-gradient-2: oklch(0.414 0.135 287.661); /* #4a3a8f */
+  --bg-gradient-3: oklch(0.29 0.079 287.527); /* #2a2350 */
+  --bg-gradient-4: oklch(0.198 0.06 290.265); /* #160f2e, почти чёрный */
+  --bg-vignette: rgba(0, 0, 0, 0.4); /* в dark затемнение центра заметнее */
+  --bg-mask-opacity: 0.03;
 }
 
 @layer base {
@@ -137,4 +158,33 @@
   html {
     @apply font-sans;
   }
+}
+
+.bg {
+  z-index: -1;
+  position: fixed;
+  inset: 0;
+  /*background-color: var(--background); /* подложка */
+  background:
+    radial-gradient(circle at center, var(--bg-vignette) 0%, transparent 65%),
+    linear-gradient(
+      45deg,
+      var(--bg-gradient-1) 0%,
+      var(--bg-gradient-2) 33%,
+      var(--bg-gradient-3) 66%,
+      var(--bg-gradient-4) 100%
+    );
+}
+.bg::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-color: var(--foreground);
+  opacity: var(--bg-mask-opacity);
+  -webkit-mask-image: url("/src/shared/assets/icons/pattern-14.svg");
+  mask-image: url("/src/shared/assets/icons/pattern-14.svg");
+  -webkit-mask-repeat: repeat;
+  mask-repeat: repeat;
+  -webkit-mask-size: 375px 812px;
+  mask-size: 375px 812px;
 }

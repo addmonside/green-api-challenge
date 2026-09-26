@@ -1,5 +1,5 @@
-import { routes } from '@/shared/model'
 import { createBrowserRouter } from 'react-router'
+import { routes } from '@/shared/model'
 
 export const makeRouter = (app: React.ReactNode) =>
   createBrowserRouter([

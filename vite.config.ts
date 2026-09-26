@@ -4,10 +4,10 @@ import { storybookTest } from '@storybook/addon-vitest/vitest-plugin'
 import tailwindcss from '@tailwindcss/vite'
 import react, { reactCompilerPreset } from '@vitejs/plugin-react'
 import { playwright } from '@vitest/browser-playwright'
-import { defineConfig } from 'vitest/config'
 import checker from 'vite-plugin-checker'
 import mkcert from 'vite-plugin-mkcert'
 import createSvgSpritePlugin from 'vite-plugin-svg-sprite'
+import { defineConfig } from 'vitest/config'
 
 const dirname = import.meta.dirname
 
