@@ -1,6 +1,7 @@
 import { useForm } from '@tanstack/react-form'
 import { useNavigate } from 'react-router'
-import { getAccountSettings, getErrorMessage, isUnauthorizedError } from '@/shared/api'
+import { getAccountSettings } from '@/services/account'
+import { getErrorMessage, isUnauthorizedError } from '@/shared/api'
 import { credentialsSchema, routes, useCredentials } from '@/shared/model'
 
 export function useLoginForm() {
