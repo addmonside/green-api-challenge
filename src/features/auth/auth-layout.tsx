@@ -1,10 +1,11 @@
 import { Outlet } from 'react-router'
+import { Layout } from '@/shared/ui/layout'
 
 export function AuthLayout() {
   return (
-    <div className="min-h-svh flex flex-col items-center justify-center">
+    <Layout variant="auth">
       <Outlet />
-    </div>
+    </Layout>
   )
 }
 
