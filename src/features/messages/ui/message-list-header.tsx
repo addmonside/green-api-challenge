@@ -12,7 +12,6 @@ import { TimeLastSeen } from '@/shared/ui/time-last-seen'
 export function MessageListHeader({ chatId }: { chatId: string }) {
   const navigate = useNavigate()
   const { data, isPending } = useContactInfo(chatId)
-  console.log(data)
 
   return (
     <>
