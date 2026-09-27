@@ -1,7 +1,7 @@
 # Чат для Telegram на GREEN-API HTTP API
 
 <p align="center">
-  <video src="docs/preview.mp4" width="640" muted playsinline controls></video>
+  <video src="https://raw.githubusercontent.com/addmonside/green-api-challenge/main/docs/preview.mp4" width="640" muted playsinline controls></video>
 </p>
 
 Веб-интерфейс для отправки и получения текстовых сообщений в мессенджере Telegram через
