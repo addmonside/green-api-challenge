@@ -1,8 +1,10 @@
 import { useParams } from 'react-router'
 import { useContactInfo } from '@/services/contacts'
 import { PageLayout } from '@/shared/ui/page-layout'
+import { ScrollDown } from '@/shared/ui/scroll-down'
 import { useMessageList } from './model/use-message-list'
 import { useMessageNotificationPoller } from './model/use-message-notification-poller'
+import { useSendMessage } from './model/use-send-message'
 import { MessageList } from './ui/message-list'
 import { MessageListHeader } from './ui/message-list-header'
 import { ChatPanel } from './ui/message-list-panel'
@@ -10,7 +12,8 @@ import { ChatPanel } from './ui/message-list-panel'
 function MessageListPage() {
   const { chatId = '' } = useParams()
   const { data } = useContactInfo(chatId)
-  const { data: messages = [], isPending } = useMessageList(chatId)
+  const { data: messages = [], isPending, error: messageListError } = useMessageList(chatId)
+  const { sendMessage, error } = useSendMessage(chatId)
   useMessageNotificationPoller(chatId)
 
   return (
@@ -22,7 +25,17 @@ function MessageListPage() {
         />
       </PageLayout.Header>
       <PageLayout.Toolbar>
-        <ChatPanel chatId={chatId} />
+        {(!!error || !!messageListError) && (
+          <PageLayout.Error
+            title={
+              messageListError
+                ? 'Проблема при получении сообщений'
+                : 'Проблема при отправке сообщения'
+            }
+            error={messageListError ?? error}
+          />
+        )}
+        <ChatPanel onSend={sendMessage} />
       </PageLayout.Toolbar>
       <PageLayout.Content>
         {!isPending && messages.length === 0 && (

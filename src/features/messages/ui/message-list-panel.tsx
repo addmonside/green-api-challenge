@@ -1,21 +1,14 @@
 import { useState } from 'react'
-import { getErrorMessage } from '@/shared/api'
 import SendIcon from '@/shared/assets/icons/send.svg'
-import { Alert, AlertDescription } from '@/shared/ui/kit/alert'
 import { Button } from '@/shared/ui/kit/button'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/shared/ui/kit/input-group'
-import { useSendMessage } from '../model/use-send-message'
 
-export function ChatPanel({ chatId }: { chatId: string }) {
+export function ChatPanel({ onSend }: { onSend: (text: string) => void }) {
   const [text, setText] = useState('')
-  const { sendMessage, isPending, error } = useSendMessage(chatId)
-
-  const canSend = text.trim() !== '' && !isPending
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault()
-    if (!canSend) return
-    sendMessage(text.trim())
+    if (text.trim() === '') return
+    onSend(text.trim())
     setText('')
   }
 
@@ -29,16 +22,11 @@ export function ChatPanel({ chatId }: { chatId: string }) {
           aria-label="Текст сообщения"
         />
         <InputGroupAddon align="inline-end">
-          <Button variant="chat-send" type="submit" disabled={!canSend}>
+          <Button variant="chat-send" type="submit">
             <SendIcon />
           </Button>
         </InputGroupAddon>
       </InputGroup>
-      {!!error && (
-        <Alert variant="destructive" className="rounded-lg">
-          <AlertDescription>{getErrorMessage(error)}</AlertDescription>
-        </Alert>
-      )}
     </form>
   )
 }

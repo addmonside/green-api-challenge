@@ -1,27 +1,8 @@
-import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@/shared/ui/kit/empty'
 import { MessageGroup } from '@/shared/ui/kit/message'
 import type { ChatMessage } from '../model/message-converter'
 import { MessageListItem } from './message-list-item'
 
-export function MessageList({
-  messages,
-  isPending,
-}: {
-  messages: ChatMessage[]
-  isPending?: boolean
-}) {
-  if (!isPending && messages.length === 0) {
-    return (
-      <Empty>
-        <EmptyHeader>
-          <EmptyMedia variant="icon" />
-          <EmptyTitle>Сообщений пока нет</EmptyTitle>
-          <EmptyDescription>Напишите первое сообщение в этом чате.</EmptyDescription>
-        </EmptyHeader>
-      </Empty>
-    )
-  }
-
+export function MessageList({ messages }: { messages: ChatMessage[] }) {
   return (
     <MessageGroup>
       {messages.map((message) => (
