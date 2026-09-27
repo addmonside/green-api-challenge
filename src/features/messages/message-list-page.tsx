@@ -41,7 +41,7 @@ function MessageListPage() {
           />
         </ShowIf>
         <ShowIf condition={!isPending && messages.length > 0}>
-          <ScrollDown scrollingOnFirstRender scrollingOnChange dependencies={messages}>
+          <ScrollDown scrollingOnFirstRender scrollingOnChange listKey={messages.length}>
             <MessageList messages={messages} />
           </ScrollDown>
         </ShowIf>

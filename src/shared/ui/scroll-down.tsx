@@ -4,19 +4,23 @@ type ScrollDownProps = {
   children: ReactNode
   scrollingOnFirstRender?: boolean
   scrollingOnChange?: boolean
-  dependencies: unknown[]
+  /**
+   * Счётчик, по которому отслеживается изменение содержимого. Ожидается
+   * длина списка: сообщения только добавляются, поэтому рост числа означает
+   * новый элемент, а не изменившийся текст старого.
+   */
+  listKey: number
 }
 
 export function ScrollDown({
   children,
   scrollingOnFirstRender = false,
   scrollingOnChange = false,
-  dependencies,
+  listKey,
 }: ScrollDownProps) {
   const bottomRef = useRef<HTMLDivElement>(null)
   const isAtBottomRef = useRef(true)
   const isFirstRenderRef = useRef(true)
-  const dependenciesKey = JSON.stringify(dependencies)
 
   useEffect(() => {
     const el = bottomRef.current
@@ -33,7 +37,7 @@ export function ScrollDown({
     return () => observer.disconnect()
   }, [])
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: dependenciesKey — счётный триггер
+  // biome-ignore lint/correctness/useExhaustiveDependencies: listKey не читается в теле эффекта — это счётный триггер прокрутки
   useEffect(() => {
     if (isFirstRenderRef.current) {
       isFirstRenderRef.current = false
@@ -47,7 +51,7 @@ export function ScrollDown({
     if (scrollingOnChange && isAtBottomRef.current) {
       window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' })
     }
-  }, [dependenciesKey, scrollingOnFirstRender, scrollingOnChange])
+  }, [listKey, scrollingOnFirstRender, scrollingOnChange])
 
   return (
     <>
