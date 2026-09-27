@@ -20,7 +20,7 @@ export function ContactListItem({
           </Text>
           <ShowIf
             condition={!!phone}
-            then={
+            fallback={
               <Text as="span" variant="contact-phone">
                 Телефон не указан
               </Text>

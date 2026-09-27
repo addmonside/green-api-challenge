@@ -23,10 +23,10 @@ export function MessageListHeader({ chatId }: { chatId: string }) {
         <ArrowLeftIcon />
       </Button>
 
-      <ShowIf condition={!isPending} then={<InfoSkeleton />}>
+      <ShowIf condition={!isPending} fallback={<InfoSkeleton />}>
         <ShowIf
           condition={!!data}
-          then={
+          fallback={
             <Text as="h1" variant="chat-header-title" className="flex-1">
               Сообщения
             </Text>

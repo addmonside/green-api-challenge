@@ -1,11 +1,13 @@
-export function ShowIf({
-  condition,
-  children,
-  then: skeleton,
-}: {
+import type { ReactNode } from 'react'
+
+type ShowIfProps = {
   condition: boolean
-  children: React.ReactNode
-  then?: React.ReactNode
-}) {
-  return condition ? children : (skeleton ?? null)
+  /** Отображается, когда условие выполнено. */
+  children: ReactNode
+  /** Отображается, когда условие не выполнено. */
+  fallback?: ReactNode
+}
+
+export function ShowIf({ condition, children, fallback }: ShowIfProps) {
+  return condition ? children : (fallback ?? null)
 }
