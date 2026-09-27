@@ -6,7 +6,7 @@ import { useMessageNotificationPoller } from './model/use-message-notification-p
 import { useSendMessage } from './model/use-send-message'
 import { MessageList } from './ui/message-list'
 import { MessageListHeader } from './ui/message-list-header'
-import { ChatPanel } from './ui/message-list-panel'
+import { MessageListPanel } from './ui/message-list-panel'
 
 function MessageListPage() {
   const { chatId = '' } = useParams()
@@ -30,7 +30,7 @@ function MessageListPage() {
             error={messageListError ?? error}
           />
         )}
-        <ChatPanel onSend={sendMessage} />
+        <MessageListPanel onSend={sendMessage} />
       </PageLayout.Toolbar>
       <PageLayout.Content>
         {!isPending && messages.length === 0 && (

@@ -3,7 +3,7 @@ import SendIcon from '@/shared/assets/icons/send.svg'
 import { Button } from '@/shared/ui/kit/button'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/shared/ui/kit/input-group'
 
-export function ChatPanel({ onSend }: { onSend: (text: string) => void }) {
+export function MessageListPanel({ onSend }: { onSend: (text: string) => void }) {
   const [text, setText] = useState('')
   const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -22,7 +22,7 @@ export function ChatPanel({ onSend }: { onSend: (text: string) => void }) {
           aria-label="Текст сообщения"
         />
         <InputGroupAddon align="inline-end">
-          <Button variant="chat-send" type="submit">
+          <Button variant="chat-send" type="submit" aria-label="Отправить сообщение">
             <SendIcon />
           </Button>
         </InputGroupAddon>
