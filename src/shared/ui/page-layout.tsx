@@ -5,6 +5,7 @@ import { cn } from 'cn'
 import { createContext, type ReactNode, useContext, useMemo } from 'react'
 import GhostIcon from '@/shared/assets/icons/ghost.svg'
 import InfoIcon from '@/shared/assets/icons/info.svg'
+import { getErrorMessage } from '../api'
 import { Alert, AlertAction, AlertDescription, AlertTitle } from './kit/alert'
 import {
   Empty,
@@ -133,10 +134,7 @@ function PageLayoutToolbar({ className, as, render, ...props }: PageLayoutToolba
       as={as}
       render={render}
       data-slot="page-layout-toolbar"
-      className={cn(
-        'fixed bottom-0 flex flex-col w-full mb-7.5 z-10 bg-card rounded-full h-12 p-1',
-        className,
-      )}
+      className={cn('fixed bottom-0 flex flex-col w-full mb-7.5 z-10 min-h-12', className)}
       {...props}
     />
   )
@@ -154,11 +152,13 @@ function PageLayoutError({
   action?: ReactNode
 }) {
   if (!error) return null
+
+  const message = getErrorMessage(error)
   return (
-    <Alert variant="destructive" data-slot="page-layout-error">
+    <Alert variant="destructive" data-slot="page-layout-error" className="my-7.5">
       {media ?? <InfoIcon />}
       {title && <AlertTitle>{title}</AlertTitle>}
-      <AlertDescription>{error.message}</AlertDescription>
+      <AlertDescription>{message}</AlertDescription>
       {action && <AlertAction>{action}</AlertAction>}
     </Alert>
   )
@@ -178,11 +178,11 @@ function PageLayoutEmpty({
   return (
     <Empty>
       <EmptyHeader>
-        <EmptyMedia variant="icon">{media ?? <GhostIcon />}</EmptyMedia>
         <EmptyTitle>{title}</EmptyTitle>
         <EmptyDescription>{description}</EmptyDescription>
       </EmptyHeader>
       {!!content && <EmptyContent>{content}</EmptyContent>}
+      <EmptyMedia variant="icon">{media ?? <GhostIcon />}</EmptyMedia>
     </Empty>
   )
 }
