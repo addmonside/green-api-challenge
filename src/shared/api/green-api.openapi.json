@@ -307,9 +307,9 @@
         "operationId": "getAccountSettings"
       }
     },
-    "/waInstance{idInstance}/GetChats/{apiTokenInstance}": {
+    "/waInstance{idInstance}/getContacts/{apiTokenInstance}": {
       "get": {
-        "summary": "Получить список чатов",
+        "summary": "Получить контакты",
         "parameters": [
           {
             "name": "idInstance",
@@ -338,14 +338,14 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ChatListItem"
+                    "$ref": "#/components/schemas/ContactListItem"
                   }
                 }
               }
             }
           }
         },
-        "operationId": "getChats"
+        "operationId": "getContacts"
       }
     },
     "/waInstance{idInstance}/checkAccount/{apiTokenInstance}": {
@@ -674,17 +674,26 @@
         },
         "required": ["type", "idMessage", "timestamp", "chatId"]
       },
-      "ChatListItem": {
+      "ContactListItem": {
         "type": "object",
         "properties": {
           "chatId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "contactName": {
+            "type": "string"
+          },
+          "type": {
             "type": "string"
           },
           "phoneNumber": {
             "type": "number"
           }
         },
-        "required": ["chatId", "phoneNumber"]
+        "required": ["chatId"]
       },
       "CheckAccountRequest": {
         "type": "object",

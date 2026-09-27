@@ -32,8 +32,8 @@ const operations = [
     path: ['Аккаунт', 'Получить информацию об аккаунте'],
   },
   {
-    operationId: 'getChats',
-    path: ['Сервисные методы', 'Получить список чатов'],
+    operationId: 'getContacts',
+    path: ['Сервисные методы', 'Получить контакты'],
   },
   {
     operationId: 'checkAccount',
@@ -189,13 +189,16 @@ const schemas = {
     },
     required: ['stateInstance'],
   },
-  ChatListItem: {
+  ContactListItem: {
     type: 'object',
     properties: {
       chatId: { type: 'string' },
+      name: { type: 'string' },
+      contactName: { type: 'string' },
+      type: { type: 'string' },
       phoneNumber: { type: 'number' },
     },
-    required: ['chatId', 'phoneNumber'],
+    required: ['chatId'],
   },
   CheckAccountRequest: {
     type: 'object',
@@ -241,7 +244,9 @@ const responseSchemas = {
     200: { type: 'array', items: { $ref: '#/components/schemas/ChatHistoryMessage' } },
   },
   getAccountSettings: { 200: 'GetAccountSettingsResponse' },
-  getChats: { 200: { type: 'array', items: { $ref: '#/components/schemas/ChatListItem' } } },
+  getContacts: {
+    200: { type: 'array', items: { $ref: '#/components/schemas/ContactListItem' } },
+  },
   checkAccount: { 200: 'CheckAccountResponse' },
   getContactInfo: { 200: 'GetContactInfoResponse' },
 }

@@ -1,14 +1,17 @@
 import { apiClientConfig } from '@/shared/api'
 import { useGetAccountSettings } from '@/shared/api/generated/hooks'
-import type { Credentials } from '@/shared/model'
+import { useCredentials } from '@/shared/model'
 
-export const useAccount = (credentials: Credentials) =>
-  useGetAccountSettings(
+export const useAccount = () => {
+  const { credentials } = useCredentials()
+
+  return useGetAccountSettings(
     {
       path: {
-        idInstance: credentials.idInstance,
-        apiTokenInstance: credentials.apiTokenInstance,
+        idInstance: credentials?.idInstance || '',
+        apiTokenInstance: credentials?.apiTokenInstance || '',
       },
     },
-    { client: apiClientConfig, query: { staleTime: Infinity } },
+    { client: apiClientConfig, query: { staleTime: Infinity, enabled: !!credentials } },
   )
+}

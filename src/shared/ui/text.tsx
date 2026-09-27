@@ -7,6 +7,8 @@ const textVariants = cva('@container/page-layout', {
       default: 'text-foreground font-normal font-base',
       'chat-header-title': 'font-medium line-clamp-1 lleading-tight',
       'chat-header-description': 'text-sm text-muted-foreground line-clamp-1 leading-tight',
+      'contact-name': 'block truncate',
+      'contact-phone': 'block truncate text-sm text-muted-foreground',
     },
   },
   defaultVariants: {
