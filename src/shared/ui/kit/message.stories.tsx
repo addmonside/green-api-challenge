@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { expect } from 'storybook/test'
 
+import { Time } from '@/shared/ui/time'
+import { Bubble, BubbleContent, BubbleTail } from './bubble'
 import {
   Message,
   MessageAvatar,
@@ -9,6 +11,9 @@ import {
   MessageGroup,
   MessageHeader,
 } from './message'
+
+const at = (hours: number, minutes: number) =>
+  new Date(2025, 0, 15, hours, minutes).getTime() / 1000
 
 const meta = {
   component: Message,
@@ -56,23 +61,52 @@ export const Outgoing: Story = {
 
 export const Conversation: Story = {
   render: () => (
-    <MessageGroup className="w-full max-w-80">
+    <MessageGroup className="w-full max-w-80 gap-3">
       <Message>
-        <MessageAvatar className="size-8">A</MessageAvatar>
         <MessageContent>
-          <MessageHeader>Alex</MessageHeader>
-          <p className="rounded-lg bg-secondary px-3 py-2">Hey! Did you get my message?</p>
-          <MessageFooter>09:11</MessageFooter>
+          <Bubble variant="muted">
+            <BubbleContent className="flex flex-wrap items-end justify-end gap-x-1.5 rounded-bl-none">
+              <span className="min-w-0 grow">Hey! Did you get my message?</span>
+              <Time timestamp={at(9, 11)} className="text-muted-foreground" />
+            </BubbleContent>
+            <BubbleTail />
+          </Bubble>
+        </MessageContent>
+      </Message>
+      <Message>
+        <MessageContent>
+          <Bubble variant="muted">
+            <BubbleContent className="flex flex-wrap items-end justify-end gap-x-1.5">
+              <span className="min-w-0 grow">Long message to check the tail position and time</span>
+              <Time timestamp={at(9, 12)} className="text-muted-foreground" />
+            </BubbleContent>
+          </Bubble>
         </MessageContent>
       </Message>
       <Message align="end">
         <MessageContent>
-          <p className="rounded-lg bg-primary px-3 py-2 text-primary-foreground">
-            Yes, replying now.
-          </p>
-          <MessageFooter>09:12</MessageFooter>
+          <Bubble>
+            <BubbleContent className="flex flex-wrap items-end justify-end gap-x-1.5">
+              <span className="min-w-0 grow">Yes, replying now.</span>
+              <Time timestamp={at(9, 12)} className="text-primary-foreground/70" />
+            </BubbleContent>
+          </Bubble>
+        </MessageContent>
+      </Message>
+      <Message align="end">
+        <MessageContent>
+          <Bubble>
+            <BubbleContent className="flex flex-wrap items-end justify-end gap-x-1.5 rounded-br-none">
+              <span className="min-w-0 grow">And one more</span>
+              <Time timestamp={at(9, 13)} className="text-primary-foreground/70" />
+            </BubbleContent>
+            <BubbleTail align="end" />
+          </Bubble>
         </MessageContent>
       </Message>
     </MessageGroup>
   ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByText('09:13')).toBeVisible()
+  },
 }

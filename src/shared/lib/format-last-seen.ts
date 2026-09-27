@@ -1,3 +1,5 @@
+import { formatClock } from './format-clock'
+
 const minutesForms = ['минуту', 'минуты', 'минут'] as const
 
 const pluralize = (value: number, forms: readonly [string, string, string]) => {
@@ -9,8 +11,6 @@ const pluralize = (value: number, forms: readonly [string, string, string]) => {
 }
 
 const pad = (value: number) => String(value).padStart(2, '0')
-
-const formatTime = (date: Date) => `${pad(date.getHours())}:${pad(date.getMinutes())}`
 
 const formatDate = (date: Date) =>
   `${pad(date.getDate())}.${pad(date.getMonth() + 1)}.${date.getFullYear()}`
@@ -31,7 +31,7 @@ export const formatLastSeen = (lastSeen: number, now: number = Date.now()): stri
   const dayDiff = Math.round(
     (startOfDay(nowDate).getTime() - startOfDay(date).getTime()) / 86_400_000,
   )
-  if (dayDiff === 0) return `был(а) сегодня в ${formatTime(date)}`
-  if (dayDiff === 1) return `был(а) вчера в ${formatTime(date)}`
+  if (dayDiff === 0) return `был(а) сегодня в ${formatClock(lastSeen)}`
+  if (dayDiff === 1) return `был(а) вчера в ${formatClock(lastSeen)}`
   return `был(а) ${formatDate(date)}`
 }

@@ -96,7 +96,7 @@ const pageLayoutContentVariants = cva('', {
     variant: {
       default: 'grid flex-1 gap-12',
       centered: 'flex flex-col flex-1 items-center justify-center gap-12',
-      chat: 'flex flex-col flex-1 pt-[1.875rem] pb-[6.75rem] gap-[1.875rem]',
+      chat: 'flex flex-col flex-1 pt-[1.875rem] pb-[6.75rem]',
     },
   },
   defaultVariants: {
