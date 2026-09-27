@@ -6,7 +6,6 @@ import InfoIcon from '@/shared/assets/icons/info.svg'
 import { Alert, AlertDescription, AlertTitle } from '@/shared/ui/kit/alert'
 import { Button } from '@/shared/ui/kit/button'
 import { Field, FieldDescription, FieldError, FieldLabel } from '@/shared/ui/kit/field'
-import { Label } from '@/shared/ui/kit/label'
 
 type FormStateAny = AnyFormApi['state']
 type ComponentRender = ReactNode | Promise<ReactNode>
@@ -167,5 +166,4 @@ export const Form = Object.assign(FormWrapper, {
   Submit: FormSubmit,
   Actions: FormActions,
   Group: FormGroup,
-  Label,
 })
