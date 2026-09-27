@@ -194,3 +194,24 @@
   -webkit-mask-size: 375px 812px;
   mask-size: 375px 812px;
 }
+
+/*autofill*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  /* Растягиваем анимацию смены цвета на ~1,4 часа */
+  transition: background-color 5000s ease-in-out 0s;
+
+  /* Важно: без этого текст может стать невидимым */
+  -webkit-text-fill-color: var(--foreground); /* Или ваш цвет текста */
+}
+input:-webkit-autofill {
+  -webkit-text-fill-color: var(--foreground);
+  /* Создаем огромную внутреннюю тень, чтобы перекрыть фон браузера */
+  -webkit-box-shadow: 0 0 0 1000px transparent inset;
+  background-clip: content-box;
+}
+input:-moz-autofill {
+  background-color: transparent;
+}
