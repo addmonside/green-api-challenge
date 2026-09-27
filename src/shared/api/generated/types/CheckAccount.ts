@@ -20,8 +20,10 @@ export type CheckAccountPath = {
 };
 
 export type CheckAccountStatus200 = {
-    exist: boolean;
-    chatId: string;
+    exist?: boolean;
+    chatId?: string;
+    status?: boolean;
+    reason?: string;
 };
 
 export type CheckAccountStatus400 = ApiError;

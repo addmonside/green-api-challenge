@@ -4,8 +4,10 @@
 */
 
 export type ApiError = {
+    status?: boolean;
+    reason?: string;
     statusCode?: number;
     timestamp?: string;
     path?: string;
-    message: string;
+    message?: string;
 };

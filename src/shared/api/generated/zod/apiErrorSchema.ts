@@ -6,8 +6,10 @@
 import * as z from 'zod'
 
 export const apiErrorSchema = z.object({
+  status: z.boolean().optional(),
+  reason: z.string().optional(),
   statusCode: z.number().optional(),
   timestamp: z.string().optional(),
   path: z.string().optional(),
-  message: z.string(),
+  message: z.string().optional(),
 })

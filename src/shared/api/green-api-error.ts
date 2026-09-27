@@ -6,10 +6,13 @@ const asHttpError = (error: unknown): HttpError | null => {
   return typeof status === 'number' ? (error as HttpError) : null
 }
 
+// GREEN-API отдаёт текст ошибки в reason, а message встречается только у части ответов
+// (например, у 400 на валидацию). Поэтому reason приоритетнее.
 const getServerMessage = (error: unknown) => {
   const { data } = asHttpError(error) ?? {}
   if (typeof data === 'object' && data !== null) {
-    const { message } = data as { message?: unknown }
+    const { reason, message } = data as { reason?: unknown; message?: unknown }
+    if (typeof reason === 'string' && reason !== '') return reason
     if (typeof message === 'string' && message !== '') return message
   }
   return undefined
@@ -20,6 +23,7 @@ const statusMessages: Record<number, string> = {
   403: 'Доступ запрещён',
   404: 'Не найдено',
   429: 'Слишком много запросов, попробуйте позже',
+  469: 'Исчерпан лимит запросов к информации о контакте',
 }
 
 const getStatusMessage = (status: number) => {

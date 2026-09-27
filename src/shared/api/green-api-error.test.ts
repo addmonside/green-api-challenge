@@ -11,6 +11,17 @@ describe('getErrorMessage', () => {
     expect(getErrorMessage(httpError(401, { message: 'Неверный токен' }))).toBe('Неверный токен')
   })
 
+  it('предпочитает reason полю message (формат ошибок GREEN-API)', () => {
+    expect(
+      getErrorMessage(
+        httpError(469, { status: false, reason: 'User get contact info limit reached' }),
+      ),
+    ).toBe('User get contact info limit reached')
+    expect(getErrorMessage(httpError(400, { reason: 'Wrong token', message: 'ignored' }))).toBe(
+      'Wrong token',
+    )
+  })
+
   it('подставляет текст для известных статусов без сообщения сервера', () => {
     expect(getErrorMessage(httpError(401))).toBe('Требуется авторизация')
     expect(getErrorMessage(httpError(403))).toBe('Доступ запрещён')
@@ -41,6 +52,17 @@ describe('getErrorMessage', () => {
     expect(getErrorMessage(undefined)).toBe('Что-то пошло не так')
     expect(getErrorMessage(null)).toBe('Что-то пошло не так')
   })
+
+  it('не путает ошибку валидации тела ответа с HTTP-ошибкой', () => {
+    // ParseError из @kubb приходит без status: у него есть только имя и issues.
+    const parseError = Object.assign(new Error('Validation failed'), {
+      name: 'ParseError',
+      issues: [{ message: 'Invalid input' }],
+    })
+
+    expect(getErrorMessage(parseError)).toBe('Что-то пошло не так')
+    expect(isUnauthorizedError(parseError)).toBe(false)
+  })
 })
 
 describe('isUnauthorizedError', () => {
@@ -48,5 +70,11 @@ describe('isUnauthorizedError', () => {
     expect(isUnauthorizedError(httpError(401))).toBe(true)
     expect(isUnauthorizedError(httpError(403))).toBe(false)
     expect(isUnauthorizedError(new TypeError('Failed to fetch'))).toBe(false)
+  })
+
+  it('распознаёт 401 с телом формата GREEN-API', () => {
+    expect(isUnauthorizedError(httpError(401, { status: false, reason: 'Unauthorized' }))).toBe(
+      true,
+    )
   })
 })

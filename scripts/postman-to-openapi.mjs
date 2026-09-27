@@ -60,15 +60,22 @@ const errorResponse = {
 }
 
 const schemas = {
+  // GREEN-API отдаёт ошибки как {status: false, reason: "..."} — поля message в теле нет.
+  // Если оставить message обязательным, zod-валидатор сгенерированного клиента отклонит
+  // не-2xx ответ, и @kubb бросит ParseError без status: теряются и код ответа
+  // (isUnauthorizedError перестаёт видеть 401), и текст reason от сервера.
+  // Поэтому все поля опциональны: худшее при неверном теле — пустой объект,
+  // а status и reason остаются доступны потребителю.
   ApiError: {
     type: 'object',
     properties: {
+      status: { type: 'boolean' },
+      reason: { type: 'string' },
       statusCode: { type: 'number' },
       timestamp: { type: 'string' },
       path: { type: 'string' },
       message: { type: 'string' },
     },
-    required: ['message'],
   },
   SendMessageRequest: {
     type: 'object',
@@ -207,13 +214,17 @@ const schemas = {
     },
     required: ['phoneNumber'],
   },
+  // checkAccount на 200 может вернуть {status: false, reason: "instance is starting or
+  // not authorized"} вместо {exist, chatId}. Поля не обязательные, чтобы такое тело
+  // проходило валидацию и доходило до формы, где ветвление делает вызов (checkContact).
   CheckAccountResponse: {
     type: 'object',
     properties: {
       exist: { type: 'boolean' },
       chatId: { type: 'string' },
+      status: { type: 'boolean' },
+      reason: { type: 'string' },
     },
-    required: ['exist', 'chatId'],
   },
   GetContactInfoRequest: {
     type: 'object',

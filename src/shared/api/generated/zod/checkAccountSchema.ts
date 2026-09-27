@@ -12,8 +12,10 @@ export const checkAccountPathIdInstanceSchema = z.string().describe('Идент�
 export const checkAccountPathApiTokenInstanceSchema = z.string().describe('API-токен инстанса (из личного кабинета)')
 
 export const checkAccountStatus200Schema = z.object({
-  exist: z.boolean(),
-  chatId: z.string(),
+  exist: z.boolean().optional(),
+  chatId: z.string().optional(),
+  status: z.boolean().optional(),
+  reason: z.string().optional(),
 })
 
 export const checkAccountStatus400Schema = apiErrorSchema
