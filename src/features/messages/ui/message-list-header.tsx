@@ -1,12 +1,15 @@
 import { useNavigate } from 'react-router'
+import { useContactInfo } from '@/services/contacts'
 import ArrowLeftIcon from '@/shared/assets/icons/arrow-left.svg'
 import { routes } from '@/shared/model'
+import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/kit/avatar'
 import { Button } from '@/shared/ui/kit/button'
 import { Text } from '@/shared/ui/text'
 import { TimeLastSeen } from '@/shared/ui/time-last-seen'
 
-export function MessageListHeader({ title, lastSeen }: { title: string; lastSeen?: number }) {
+export function MessageListHeader({ chatId }: { chatId: string }) {
   const navigate = useNavigate()
+  const { data } = useContactInfo(chatId)
 
   return (
     <>
@@ -17,11 +20,20 @@ export function MessageListHeader({ title, lastSeen }: { title: string; lastSeen
       >
         <ArrowLeftIcon />
       </Button>
+      <Avatar>
+        <AvatarImage src={data?.avatar} alt={data?.name ?? data?.contactName} />
+        <AvatarFallback>
+          {(data?.name ?? data?.contactName)
+            ?.split(' ')
+            .reduce((acc, char) => acc + char[0], '')
+            .toLocaleUpperCase()}
+        </AvatarFallback>
+      </Avatar>
       <div className="flex-1 flex flex-col justify-between">
         <Text as="h1" variant="chat-header-title">
-          {title}
+          {data?.name ?? data?.contactName}
         </Text>
-        <TimeLastSeen lastSeen={lastSeen} />
+        <TimeLastSeen lastSeen={data?.lastSeen} />
       </div>
     </>
   )
