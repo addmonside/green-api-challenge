@@ -7,8 +7,8 @@ function LoginPage() {
       <CardHeader>
         <CardTitle>Вход в GREEN-API</CardTitle>
         <CardDescription>
-          Для продолжения работы, укажите данные инстанса, чтобы получить возможность просмотра
-          чатов и отправки сообщений.
+          Чтобы получить возможность просмотра чатов и отправки сообщений, введите данные инстанса и
+          токена
         </CardDescription>
       </CardHeader>
       <CardContent>
