@@ -7,7 +7,15 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "includes": ["**", "!public", "!**/public", "!src/shared/api/generated"]
+    "includes": [
+      "**",
+      "!public",
+      "!**/public",
+      "!src/shared/api/generated",
+      "!!**/.vercel",
+      "!**/dist",
+      "!**/pnpm-lock.yaml"
+    ]
   },
   "formatter": {
     "enabled": true,
