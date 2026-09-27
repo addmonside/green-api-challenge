@@ -32,7 +32,9 @@ function MessageListPage() {
           />
         )}
         {!isPending && messages.length > 0 && (
-          <MessageList messages={messages} isPending={isPending} />
+          <ScrollDown scrollingOnFirstRender scrollingOnChange dependencies={messages}>
+            <MessageList messages={messages} />
+          </ScrollDown>
         )}
       </PageLayout.Content>
     </PageLayout>
