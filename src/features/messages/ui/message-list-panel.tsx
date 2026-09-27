@@ -20,6 +20,7 @@ export function MessageListPanel({ onSend }: { onSend: (text: string) => void })
           onChange={(event) => setText(event.target.value)}
           placeholder="Сообщение"
           aria-label="Текст сообщения"
+          autoComplete="off"
         />
         <InputGroupAddon align="inline-end">
           <Button variant="chat-send" type="submit" aria-label="Отправить сообщение">
