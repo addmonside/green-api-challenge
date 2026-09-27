@@ -1,11 +1,9 @@
+import { apiClientConfig } from '@/shared/api'
+import { deleteNotification as deleteNotificationRequest } from '@/shared/api/generated/clients/deleteNotification'
+import { receiveNotification as receiveNotificationRequest } from '@/shared/api/generated/clients/receiveNotification'
+import type { DeleteNotificationResponse } from '@/shared/api/generated/types/DeleteNotification'
+import type { ReceiveNotificationResponse } from '@/shared/api/generated/types/ReceiveNotification'
 import { appConfig, type Credentials } from '@/shared/model'
-import { apiClientConfig } from './client-config'
-import { deleteNotification as deleteNotificationRequest } from './generated/clients/deleteNotification'
-import { getChatHistory as getChatHistoryRequest } from './generated/clients/getChatHistory'
-import { receiveNotification as receiveNotificationRequest } from './generated/clients/receiveNotification'
-import type { DeleteNotificationResponse } from './generated/types/DeleteNotification'
-import type { GetChatHistoryBody, GetChatHistoryStatus200 } from './generated/types/GetChatHistory'
-import type { ReceiveNotificationResponse } from './generated/types/ReceiveNotification'
 
 const toPath = (credentials: Credentials) => ({
   idInstance: credentials.idInstance,
@@ -17,12 +15,6 @@ const toPath = (credentials: Credentials) => ({
  * проверка кредов на логине, long-poll уведомлений и его подтверждение,
  * история чата с кастомной обработкой сообщений.
  */
-export const getChatHistory = async (
-  credentials: Credentials,
-  body: GetChatHistoryBody,
-  signal?: AbortSignal,
-): Promise<GetChatHistoryStatus200> =>
-  getChatHistoryRequest({ ...apiClientConfig, path: toPath(credentials), body, signal }).unwrap()
 
 export const receiveNotification = async (
   credentials: Credentials,

@@ -7,4 +7,5 @@ export const appConfig = {
     staleTime: 60_000,
     refetchOnWindowFocus: false,
   },
+  messagePullingRetryDelay: 3000,
 } as const

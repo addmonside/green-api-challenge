@@ -1,22 +1,39 @@
 import { useParams } from 'react-router'
-import { useCredentials } from '@/shared/model'
+import { useContactInfo } from '@/services/contacts'
 import { PageLayout } from '@/shared/ui/page-layout'
-import { Text } from '@/shared/ui/text'
+import { useMessages } from './model/use-messages'
+import { useNotificationPoller } from './model/use-notification-poller'
+import { MessageList } from './ui/message-list'
+import { MessageListHeader } from './ui/message-list-header'
+import { ChatPanel } from './ui/message-list-panel'
 
 function MessageListPage() {
   const { chatId = '' } = useParams()
-  const { credentials } = useCredentials()
+  const { data } = useContactInfo(chatId)
+  const { data: messages = [], isPending } = useMessages(chatId)
+  useNotificationPoller(chatId)
 
   return (
     <PageLayout variant="chat">
       <PageLayout.Header>
-        <Text as="h1" className="text-lg font-medium">
-          Сообщения
-        </Text>
+        <MessageListHeader
+          title={data?.name ?? data?.contactName ?? 'Сообщения'}
+          lastSeen={data?.lastSeen}
+        />
       </PageLayout.Header>
-      <PageLayout.Content className="gap-4 p-4">
-        <p>chatId - {chatId}</p>
-        <p>credentials - {credentials?.idInstance}</p>
+      <PageLayout.Toolbar>
+        <ChatPanel chatId={chatId} />
+      </PageLayout.Toolbar>
+      <PageLayout.Content>
+        {!isPending && messages.length === 0 && (
+          <PageLayout.Empty
+            title="Нет сообщений"
+            description="Напишите первое сообщение в этом чате."
+          />
+        )}
+        {!isPending && messages.length > 0 && (
+          <MessageList messages={messages} isPending={isPending} />
+        )}
       </PageLayout.Content>
     </PageLayout>
   )
