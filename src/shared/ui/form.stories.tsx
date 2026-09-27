@@ -35,7 +35,7 @@ function CredentialsForm({
     <Form form={form} className="flex w-full max-w-sm flex-col gap-4">
       <Form.Group>
         <Form.Field name="idInstance" label="idInstance">
-          {(field) => (
+          {(field, { invalid, describedBy }) => (
             <Input
               id={field.name}
               value={field.state.value}
@@ -43,13 +43,14 @@ function CredentialsForm({
               onBlur={field.handleBlur}
               placeholder="110000000001"
               autoComplete="off"
-              aria-invalid={!field.state.meta.isValid}
+              aria-invalid={invalid}
+              aria-describedby={describedBy}
             />
           )}
         </Form.Field>
 
         <Form.Field name="apiTokenInstance" label="apiTokenInstance">
-          {(field) => (
+          {(field, { invalid, describedBy }) => (
             <Input
               id={field.name}
               value={field.state.value}
@@ -57,7 +58,8 @@ function CredentialsForm({
               onBlur={field.handleBlur}
               placeholder="d75b3a66374942c5b3c019c698abc2067e151558acbd412345"
               autoComplete="off"
-              aria-invalid={!field.state.meta.isValid}
+              aria-invalid={invalid}
+              aria-describedby={describedBy}
             />
           )}
         </Form.Field>

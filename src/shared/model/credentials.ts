@@ -57,7 +57,7 @@ export const CredentialsContext = createContext<CredentialsContextValue>(emptyCr
 export const useCredentials = () => {
   const value = use(CredentialsContext)
   // isEmpty вычисляется, а не хранится в провайдере, поэтому не может
-  // разойтись с credentials. Вне провайдера сработает credentialsNull.
+  // разойтись с credentials. Вне провайдера сработает emptyCredentials.
   const isEmpty = value.credentials.idInstance === '' && value.credentials.apiTokenInstance === ''
   return { ...emptyCredentials, ...value, isEmpty }
 }

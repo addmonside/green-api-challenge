@@ -54,6 +54,9 @@ function InputGroupAddon({
         if ((e.target as HTMLElement).closest('button')) {
           return
         }
+        // preventDefault обязателен: без него дефолтное действие mousedown
+        // снимет фокус, который мы только что поставили.
+        e.preventDefault()
         e.currentTarget.parentElement?.querySelector('input')?.focus()
       }}
       {...props}

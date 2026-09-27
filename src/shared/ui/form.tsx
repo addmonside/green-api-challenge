@@ -10,12 +10,17 @@ import { Field, FieldDescription, FieldError, FieldLabel } from '@/shared/ui/kit
 type FormStateAny = AnyFormApi['state']
 type ComponentRender = ReactNode | Promise<ReactNode>
 
+type FormFieldControl = {
+  invalid: boolean
+  describedBy?: string
+}
+
 type FormFieldProps = {
   name: string
   label?: ReactNode
   description?: ReactNode
   className?: string
-  children: (field: AnyFieldApi) => ReactNode
+  children: (field: AnyFieldApi, control: FormFieldControl) => ReactNode
 }
 
 type FormSubscribe = <TSelected>(props: {
@@ -24,7 +29,9 @@ type FormSubscribe = <TSelected>(props: {
 }) => ComponentRender
 
 type AnyReactFormApi = AnyFormApi & {
-  Field: (props: FormFieldProps) => ComponentRender
+  // TanStack вызывает children только с одним аргументом; второй аргумент
+  // добавляет уже FormField — компонент, который навешен на Form.Field.
+  Field: (props: { name: string; children: (field: AnyFieldApi) => ReactNode }) => ComponentRender
   Subscribe: FormSubscribe
 }
 
@@ -79,16 +86,20 @@ function FormWrapper({ form, className, ...props }: FormProps) {
 
 function FormField({ name, label, description, className, children }: FormFieldProps) {
   const form = useFormInstance()
+  const errorId = `${name}-error`
   return (
     <form.Field name={name}>
-      {(field) => (
-        <Field data-invalid={!field.state.meta.isValid} className={className}>
-          {label ? <FieldLabel htmlFor={name}>{label}</FieldLabel> : null}
-          {children(field)}
-          {description ? <FieldDescription>{description}</FieldDescription> : null}
-          <FieldError errors={toFieldErrors(field.state.meta.errors)} />
-        </Field>
-      )}
+      {(field) => {
+        const invalid = !field.state.meta.isValid
+        return (
+          <Field data-invalid={invalid} className={className}>
+            {label ? <FieldLabel htmlFor={name}>{label}</FieldLabel> : null}
+            {children(field, { invalid, describedBy: invalid ? errorId : undefined })}
+            {description ? <FieldDescription>{description}</FieldDescription> : null}
+            <FieldError id={errorId} errors={toFieldErrors(field.state.meta.errors)} />
+          </Field>
+        )
+      }}
     </form.Field>
   )
 }

@@ -8,7 +8,7 @@ export function LoginForm() {
     <Form form={form}>
       <Form.Group>
         <Form.Field name="idInstance" label="idInstance">
-          {(field) => (
+          {(field, { invalid, describedBy }) => (
             <Input
               id={field.name}
               value={field.state.value}
@@ -16,12 +16,13 @@ export function LoginForm() {
               onBlur={field.handleBlur}
               placeholder="410011747511"
               autoComplete="on"
-              aria-invalid={!field.state.meta.isValid}
+              aria-invalid={invalid}
+              aria-describedby={describedBy}
             />
           )}
         </Form.Field>
         <Form.Field name="apiTokenInstance" label="apiTokenInstance">
-          {(field) => (
+          {(field, { invalid, describedBy }) => (
             <Input
               id={field.name}
               value={field.state.value}
@@ -29,7 +30,8 @@ export function LoginForm() {
               onBlur={field.handleBlur}
               placeholder="d75b3a66374942c5b3c019c698abc2067e151558acbd412345"
               autoComplete="on"
-              aria-invalid={!field.state.meta.isValid}
+              aria-invalid={invalid}
+              aria-describedby={describedBy}
             />
           )}
         </Form.Field>

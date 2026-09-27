@@ -16,7 +16,7 @@ export function ChatListForm() {
           <Form form={form}>
             <Form.Group>
               <Form.Field name="recipient" label="Номер получателя">
-                {(field) => (
+                {(field, { invalid, describedBy }) => (
                   <Input
                     id={field.name}
                     value={field.state.value}
@@ -24,7 +24,8 @@ export function ChatListForm() {
                     onBlur={field.handleBlur}
                     placeholder="79999999999"
                     autoComplete="phone"
-                    aria-invalid={!field.state.meta.isValid}
+                    aria-invalid={invalid}
+                    aria-describedby={describedBy}
                   />
                 )}
               </Form.Field>
