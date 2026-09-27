@@ -13,8 +13,6 @@ dist
 dist-ssr
 *.local
 .tls
-/*lock.*
-/*workspace.*
 
 #env
 .env

@@ -1,0 +1,20 @@
+allowBuilds:
+  esbuild: true
+minimumReleaseAgeExclude:
+  - vite@8.3.1
+  - lucide-react@1.48.0
+  - '@tanstack/query-core@5.104.0'
+  - '@tanstack/react-query@5.104.0'
+  - '@kubb/adapter-oas@5.3.19'
+  - '@kubb/ast@5.3.19'
+  - '@kubb/cli@5.3.19'
+  - '@kubb/core@5.3.19'
+  - '@kubb/kit@5.3.19'
+  - '@kubb/mcp@5.3.19'
+  - '@kubb/parser-md@5.3.19'
+  - '@kubb/parser-ts@5.3.19'
+  - '@kubb/plugin-barrel@5.3.19'
+  - '@kubb/renderer-jsx@5.3.19'
+  - '@kubb/studio@5.3.19'
+  - kubb@5.3.19
+  - unplugin-kubb@5.3.19
