@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
 import { useCredentials } from '@/shared/model'
-import { type ChatMessage, mergeMessages, toMessagesFromHistory } from './chat-message'
 import { getChatHistory } from './get-chat-history'
-import { messagesQueryKey } from './messages-cache'
+import { type ChatMessage, mergeMessages, toMessagesFromHistory } from './message-converter'
+import { messagesQueryKey } from './message-list-cache'
 
 const historyCount = 100
 
-export const useMessages = (chatId: string) => {
+export const useMessageList = (chatId: string) => {
   const { credentials } = useCredentials()
   return useQuery({
     queryKey: messagesQueryKey(chatId),

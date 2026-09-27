@@ -1,6 +1,6 @@
 import type { QueryClient } from '@tanstack/react-query'
-import type { ChatMessage } from './chat-message'
-import { mergeMessages } from './chat-message'
+import type { ChatMessage } from './message-converter'
+import { mergeMessages } from './message-converter'
 
 export const messagesQueryKey = (chatId: string) => ['messages', chatId] as const
 

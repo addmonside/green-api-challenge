@@ -3,13 +3,11 @@ import type { ChatHistoryMessage } from '../../../shared/api/generated/types/Cha
 import type { NotificationBody } from '../../../shared/api/generated/types/NotificationBody'
 import {
   type ChatMessage,
-  getChatInitial,
-  getChatTitle,
   mergeMessages,
   toMessageFromNotification,
   toMessagesFromHistory,
   toOutgoingMessage,
-} from './chat-message'
+} from './message-converter'
 
 const notification = (body: Partial<NotificationBody>): NotificationBody =>
   ({
@@ -133,27 +131,5 @@ describe('mergeMessages', () => {
     const current = [message('a', 1)]
 
     expect(mergeMessages(current, [])).toBe(current)
-  })
-})
-
-describe('chat presentation', () => {
-  it('prefers the phone number as a title', () => {
-    expect(getChatTitle({ chatId: '11001234567@c.us', phoneNumber: 11001234567 })).toBe(
-      '+11001234567',
-    )
-  })
-
-  it('falls back to the chat id for groups', () => {
-    expect(getChatTitle({ chatId: '120363000000000000@g.us', phoneNumber: 0 })).toBe(
-      '120363000000000000@g.us',
-    )
-  })
-
-  it('uses a plus as the initial for a phone chat', () => {
-    expect(getChatInitial({ chatId: '11001234567@c.us', phoneNumber: 11001234567 })).toBe('+')
-  })
-
-  it('uses the first chat id char as the initial for a group', () => {
-    expect(getChatInitial({ chatId: '120363000000000000@g.us', phoneNumber: 0 })).toBe('1')
   })
 })

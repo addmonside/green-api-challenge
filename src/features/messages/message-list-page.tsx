@@ -1,8 +1,8 @@
 import { useParams } from 'react-router'
 import { useContactInfo } from '@/services/contacts'
 import { PageLayout } from '@/shared/ui/page-layout'
-import { useMessages } from './model/use-messages'
-import { useNotificationPoller } from './model/use-notification-poller'
+import { useMessageList } from './model/use-message-list'
+import { useMessageNotificationPoller } from './model/use-message-notification-poller'
 import { MessageList } from './ui/message-list'
 import { MessageListHeader } from './ui/message-list-header'
 import { ChatPanel } from './ui/message-list-panel'
@@ -10,8 +10,8 @@ import { ChatPanel } from './ui/message-list-panel'
 function MessageListPage() {
   const { chatId = '' } = useParams()
   const { data } = useContactInfo(chatId)
-  const { data: messages = [], isPending } = useMessages(chatId)
-  useNotificationPoller(chatId)
+  const { data: messages = [], isPending } = useMessageList(chatId)
+  useMessageNotificationPoller(chatId)
 
   return (
     <PageLayout variant="chat">

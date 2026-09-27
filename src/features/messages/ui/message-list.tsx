@@ -1,6 +1,6 @@
 import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@/shared/ui/kit/empty'
 import { MessageGroup } from '@/shared/ui/kit/message'
-import type { ChatMessage } from '../model/chat-message'
+import type { ChatMessage } from '../model/message-converter'
 import { MessageListItem } from './message-list-item'
 
 export function MessageList({

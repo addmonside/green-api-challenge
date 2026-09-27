@@ -3,8 +3,8 @@ import { apiClientConfig } from '@/shared/api'
 import { sendMessage as sendMessageRequest } from '@/shared/api/generated/clients/sendMessage'
 import { useSendMessage as useSendMessageMutation } from '@/shared/api/generated/hooks'
 import { useCredentials } from '@/shared/model'
-import { toOutgoingMessage } from './chat-message'
-import { appendMessage } from './messages-cache'
+import { toOutgoingMessage } from './message-converter'
+import { appendMessage } from './message-list-cache'
 
 export const useSendMessage = (chatId: string) => {
   const { credentials } = useCredentials()

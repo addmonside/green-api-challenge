@@ -1,6 +1,5 @@
-import type { ChatHistoryMessage } from '../../../shared/api/generated/types/ChatHistoryMessage'
-import type { ChatListItem } from '../../../shared/api/generated/types/ChatListItem'
-import type { NotificationBody } from '../../../shared/api/generated/types/NotificationBody'
+import type { ChatHistoryMessage } from '@/shared/api/generated/types/ChatHistoryMessage'
+import type { NotificationBody } from '@/shared/api/generated/types/NotificationBody'
 
 export type MessageDirection = 'incoming' | 'outgoing'
 
@@ -69,9 +68,3 @@ export const mergeMessages = (current: ChatMessage[], incoming: ChatMessage[]): 
     (left, right) => left.timestamp - right.timestamp || left.id.localeCompare(right.id),
   )
 }
-
-export const getChatTitle = (chat: Pick<ChatListItem, 'chatId' | 'phoneNumber'>) =>
-  chat.phoneNumber ? `+${chat.phoneNumber}` : chat.chatId
-
-export const getChatInitial = (chat: Pick<ChatListItem, 'chatId' | 'phoneNumber'>) =>
-  chat.phoneNumber ? '+' : chat.chatId.slice(0, 1)

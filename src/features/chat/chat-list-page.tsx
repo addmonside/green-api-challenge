@@ -1,5 +1,4 @@
 import { PageLayout } from '@/shared/ui/page-layout'
-import { ChatList } from './chat-list'
 import { ChatListForm } from './chat-list-form'
 import { ChatListHeader } from './chat-list-header'
 
