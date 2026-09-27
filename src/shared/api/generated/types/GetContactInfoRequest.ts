@@ -3,7 +3,6 @@
 * Do not edit manually.
 */
 
-export type ChatListItem = {
+export type GetContactInfoRequest = {
     chatId: string;
-    phoneNumber: number;
 };

@@ -5,7 +5,6 @@
 
 import * as z from 'zod'
 
-export const chatListItemSchema = z.object({
-  chatId: z.string(),
+export const checkAccountRequestSchema = z.object({
   phoneNumber: z.number(),
 })

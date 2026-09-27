@@ -9,7 +9,10 @@ type WidthBoundaryProps = useRender.ComponentProps<'div'> & {
 function WidthBoundary({ className, as, render, ...props }: WidthBoundaryProps) {
   return useRender({
     defaultTagName: as,
-    props: mergeProps<'div'>({ className: cn('max-w-174 w-full mx-auto my-0', className) }, props),
+    props: mergeProps<'div'>(
+      { className: cn('max-w-174 w-full mx-auto my-0 px-2 md:px-0', className) },
+      props,
+    ),
     render,
     state: { slot: 'width-boundary' },
   })

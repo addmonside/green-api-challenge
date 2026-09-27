@@ -2,6 +2,7 @@ import type { AnyFieldApi, AnyFormApi } from '@tanstack/react-form'
 import { cn } from 'cn'
 import type { ComponentProps, ReactNode } from 'react'
 import { createContext, useContext } from 'react'
+import InfoIcon from '@/shared/assets/icons/info.svg'
 import { Alert, AlertDescription, AlertTitle } from '@/shared/ui/kit/alert'
 import { Button } from '@/shared/ui/kit/button'
 import { Field, FieldDescription, FieldError, FieldLabel } from '@/shared/ui/kit/field'
@@ -65,7 +66,7 @@ function FormWrapper({ form, className, ...props }: FormProps) {
       <form
         noValidate
         data-slot="form"
-        className={cn('flex flex-col gap-4', className)}
+        className={cn('flex flex-col gap-6', className)}
         onSubmit={(event) => {
           event.preventDefault()
           event.stopPropagation()
@@ -106,6 +107,7 @@ function FormError({ title = 'Ошибка', className, ...props }: FormErrorPro
         if (!message) return null
         return (
           <Alert variant="destructive" className={className} {...props}>
+            <InfoIcon />
             <AlertTitle>{title}</AlertTitle>
             <AlertDescription>{message}</AlertDescription>
           </Alert>
@@ -124,7 +126,12 @@ function FormSubmit({ children, pendingLabel, disabled, ...props }: FormSubmitPr
   return (
     <form.Subscribe selector={(state) => [state.isSubmitting] as const}>
       {([isSubmitting]) => (
-        <Button type="submit" disabled={disabled || isSubmitting} {...props}>
+        <Button
+          type="submit"
+          variant="ghost-primary"
+          disabled={disabled || isSubmitting}
+          {...props}
+        >
           {isSubmitting && pendingLabel ? pendingLabel : children}
         </Button>
       )}
@@ -133,7 +140,25 @@ function FormSubmit({ children, pendingLabel, disabled, ...props }: FormSubmitPr
 }
 
 function FormActions({ className, ...props }: ComponentProps<'div'>) {
-  return <div data-slot="form-actions" className={cn(className)} {...props} />
+  return (
+    <div data-slot="form-actions" className={cn('flex flex-col gap-2', className)} {...props} />
+  )
+}
+
+function FormGroup({ className, ...props }: ComponentProps<'fieldset'>) {
+  const form = useFormInstance()
+  return (
+    <form.Subscribe selector={(state) => state.isSubmitting}>
+      {(isSubmitting) => (
+        <fieldset
+          data-slot="form-group"
+          disabled={isSubmitting}
+          className={cn('flex flex-col gap-2.5', className)}
+          {...props}
+        />
+      )}
+    </form.Subscribe>
+  )
 }
 
 export const Form = Object.assign(FormWrapper, {
@@ -141,5 +166,6 @@ export const Form = Object.assign(FormWrapper, {
   Error: FormError,
   Submit: FormSubmit,
   Actions: FormActions,
+  Group: FormGroup,
   Label,
 })

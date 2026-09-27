@@ -32,8 +32,16 @@ const operations = [
     path: ['Аккаунт', 'Получить информацию об аккаунте'],
   },
   {
-    operationId: 'getChats',
-    path: ['Сервисные методы', 'Получить список чатов'],
+    operationId: 'getContacts',
+    path: ['Сервисные методы', 'Получить контакты'],
+  },
+  {
+    operationId: 'checkAccount',
+    path: ['Сервисные методы', 'Проверить наличие Telegram'],
+  },
+  {
+    operationId: 'getContactInfo',
+    path: ['Сервисные методы', 'Получить инфо контакта'],
   },
 ]
 
@@ -181,13 +189,50 @@ const schemas = {
     },
     required: ['stateInstance'],
   },
-  ChatListItem: {
+  ContactListItem: {
     type: 'object',
     properties: {
       chatId: { type: 'string' },
+      name: { type: 'string' },
+      contactName: { type: 'string' },
+      type: { type: 'string' },
       phoneNumber: { type: 'number' },
     },
-    required: ['chatId', 'phoneNumber'],
+    required: ['chatId'],
+  },
+  CheckAccountRequest: {
+    type: 'object',
+    properties: {
+      phoneNumber: { type: 'number' },
+    },
+    required: ['phoneNumber'],
+  },
+  CheckAccountResponse: {
+    type: 'object',
+    properties: {
+      exist: { type: 'boolean' },
+      chatId: { type: 'string' },
+    },
+    required: ['exist', 'chatId'],
+  },
+  GetContactInfoRequest: {
+    type: 'object',
+    properties: {
+      chatId: { type: 'string' },
+    },
+    required: ['chatId'],
+  },
+  GetContactInfoResponse: {
+    type: 'object',
+    properties: {
+      avatar: { type: 'string' },
+      name: { type: 'string' },
+      contactName: { type: 'string' },
+      chatId: { type: 'string' },
+      lastSeen: { type: 'number' },
+      phoneNumber: { type: 'number' },
+    },
+    required: ['chatId'],
   },
 }
 
@@ -199,12 +244,18 @@ const responseSchemas = {
     200: { type: 'array', items: { $ref: '#/components/schemas/ChatHistoryMessage' } },
   },
   getAccountSettings: { 200: 'GetAccountSettingsResponse' },
-  getChats: { 200: { type: 'array', items: { $ref: '#/components/schemas/ChatListItem' } } },
+  getContacts: {
+    200: { type: 'array', items: { $ref: '#/components/schemas/ContactListItem' } },
+  },
+  checkAccount: { 200: 'CheckAccountResponse' },
+  getContactInfo: { 200: 'GetContactInfoResponse' },
 }
 
 const requestBodySchemas = {
   sendMessage: 'SendMessageRequest',
   getChatHistory: 'GetChatHistoryRequest',
+  checkAccount: 'CheckAccountRequest',
+  getContactInfo: 'GetContactInfoRequest',
 }
 
 // Ответы 200 разворачиваются inline (см. applySchemaOverrides), поэтому одноимённые

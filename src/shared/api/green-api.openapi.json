@@ -307,9 +307,9 @@
         "operationId": "getAccountSettings"
       }
     },
-    "/waInstance{idInstance}/GetChats/{apiTokenInstance}": {
+    "/waInstance{idInstance}/getContacts/{apiTokenInstance}": {
       "get": {
-        "summary": "Получить список чатов",
+        "summary": "Получить контакты",
         "parameters": [
           {
             "name": "idInstance",
@@ -338,14 +338,160 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ChatListItem"
+                    "$ref": "#/components/schemas/ContactListItem"
                   }
                 }
               }
             }
           }
         },
-        "operationId": "getChats"
+        "operationId": "getContacts"
+      }
+    },
+    "/waInstance{idInstance}/checkAccount/{apiTokenInstance}": {
+      "post": {
+        "summary": "Проверить наличие Telegram",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CheckAccountRequest"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "idInstance",
+            "required": true,
+            "description": "Идентификатор инстанса GREEN-API (из личного кабинета)",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apiTokenInstance",
+            "required": true,
+            "description": "API-токен инстанса (из личного кабинета)",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешный ответ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "exist": {
+                      "type": "boolean"
+                    },
+                    "chatId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["exist", "chatId"]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка валидации или выполнения запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "checkAccount"
+      }
+    },
+    "/waInstance{idInstance}/GetContactInfo/{apiTokenInstance}": {
+      "post": {
+        "summary": "Получить инфо контакта",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetContactInfoRequest"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "idInstance",
+            "required": true,
+            "description": "Идентификатор инстанса GREEN-API (из личного кабинета)",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apiTokenInstance",
+            "required": true,
+            "description": "API-токен инстанса (из личного кабинета)",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешный ответ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "avatar": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "contactName": {
+                      "type": "string"
+                    },
+                    "chatId": {
+                      "type": "string"
+                    },
+                    "lastSeen": {
+                      "type": "number"
+                    },
+                    "phoneNumber": {
+                      "type": "number"
+                    }
+                  },
+                  "required": ["chatId"]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка валидации или выполнения запроса",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getContactInfo"
       }
     }
   },
@@ -528,17 +674,44 @@
         },
         "required": ["type", "idMessage", "timestamp", "chatId"]
       },
-      "ChatListItem": {
+      "ContactListItem": {
         "type": "object",
         "properties": {
           "chatId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "contactName": {
+            "type": "string"
+          },
+          "type": {
             "type": "string"
           },
           "phoneNumber": {
             "type": "number"
           }
         },
-        "required": ["chatId", "phoneNumber"]
+        "required": ["chatId"]
+      },
+      "CheckAccountRequest": {
+        "type": "object",
+        "properties": {
+          "phoneNumber": {
+            "type": "number"
+          }
+        },
+        "required": ["phoneNumber"]
+      },
+      "GetContactInfoRequest": {
+        "type": "object",
+        "properties": {
+          "chatId": {
+            "type": "string"
+          }
+        },
+        "required": ["chatId"]
       }
     }
   },

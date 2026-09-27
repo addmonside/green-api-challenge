@@ -6,7 +6,9 @@ const textVariants = cva('@container/page-layout', {
     variant: {
       default: 'text-foreground font-normal font-base',
       'chat-header-title': 'font-medium line-clamp-1 lleading-tight',
-      'chat-header-description': 'text-sm text-muted-foreground line-clamp-1 lleading-tight',
+      'chat-header-description': 'text-sm text-muted-foreground line-clamp-1 leading-tight',
+      'contact-name': 'block truncate',
+      'contact-phone': 'block truncate text-sm text-muted-foreground',
     },
   },
   defaultVariants: {
@@ -25,10 +27,6 @@ export function Text<T extends React.ElementType = 'p'>({
   VariantProps<typeof textVariants>) {
   const Component = as || 'p'
   return (
-    <Component
-      data-slot="width-boundary"
-      className={cn(textVariants({ variant }), className)}
-      {...props}
-    />
+    <Component data-slot="text" className={cn(textVariants({ variant }), className)} {...props} />
   )
 }

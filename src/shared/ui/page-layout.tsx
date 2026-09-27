@@ -2,7 +2,19 @@ import { mergeProps } from '@base-ui/react/merge-props'
 import { useRender } from '@base-ui/react/use-render'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from 'cn'
-import { createContext, useContext, useMemo } from 'react'
+import { createContext, type ReactNode, useContext, useMemo } from 'react'
+import GhostIcon from '@/shared/assets/icons/ghost.svg'
+import InfoIcon from '@/shared/assets/icons/info.svg'
+import { getErrorMessage } from '../api'
+import { Alert, AlertAction, AlertDescription, AlertTitle } from './kit/alert'
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from './kit/empty'
 import { WidthBoundary } from './width-boundary'
 
 type Variant = 'default' | 'chat'
@@ -60,7 +72,7 @@ const pageLayoutHeaderVariants = cva('', {
     variant: {
       default: '',
       centered: '',
-      chat: 'sticky top-7.5 z-10 items-stretch justify-center rounded-full mt-7.5 flex flex-row rounded-full w-full gap-2 bg-card h-12 p-1',
+      chat: 'sticky top-7.5 z-10 items-center justify-between rounded-full mt-7.5 flex rounded-[2rem] w-full gap-2 bg-card min-h-12 p-1',
     },
   },
   defaultVariants: {
@@ -122,69 +134,63 @@ function PageLayoutToolbar({ className, as, render, ...props }: PageLayoutToolba
       as={as}
       render={render}
       data-slot="page-layout-toolbar"
-      className={cn(
-        'fixed bottom-0 flex flex-col w-full mb-7.5 z-10 bg-card rounded-full h-12 p-1',
-        className,
-      )}
+      className={cn('fixed bottom-0 flex flex-col w-full mb-7.5 z-10 min-h-12', className)}
       {...props}
     />
   )
 }
 
-// function PageLayoutError({
-//   title,
-//   error,
-//   media,
-//   action,
-// }: {
-//   title?: string
-//   error: { message: string } | null | undefined
-//   media?: ReactNode
-//   action?: ReactNode
-// }) {
-//   if (!error) return null
-//   return (
-//     <PageLayoutContent>
-//       <Alert variant="destructive" data-slot="page-layout-error">
-//         {media ?? <LucideInfo />}
-//         {title && <AlertTitle>{title}</AlertTitle>}
-//         <AlertDescription>{error.message}</AlertDescription>
-//         {action && <AlertAction>{action}</AlertAction>}
-//       </Alert>
-//     </PageLayoutContent>
-//   )
-// }
+function PageLayoutError({
+  title,
+  error,
+  media,
+  action,
+}: {
+  title?: string
+  error: { message: string } | null | undefined
+  media?: ReactNode
+  action?: ReactNode
+}) {
+  if (!error) return null
 
-// function PageLayoutEmpty({
-//   title,
-//   description,
-//   media,
-//   content,
-// }: {
-//   title: string
-//   description?: string
-//   media?: ReactNode
-//   content?: ReactNode
-// }) {
-//   return (
-//     <PageLayoutContent variant="centered" data-slot="page-layout-empty">
-//       <Empty>
-//         <EmptyHeader>
-//           <EmptyMedia variant="icon">{media ?? <LucideInfo />}</EmptyMedia>
-//           <EmptyTitle>{title}</EmptyTitle>
-//           <EmptyDescription>{description}</EmptyDescription>
-//         </EmptyHeader>
-//         {!!content && <EmptyContent>{content}</EmptyContent>}
-//       </Empty>
-//     </PageLayoutContent>
-//   )
-// }
+  const message = getErrorMessage(error)
+  return (
+    <Alert variant="destructive" data-slot="page-layout-error" className="my-7.5">
+      {media ?? <InfoIcon />}
+      {title && <AlertTitle>{title}</AlertTitle>}
+      <AlertDescription>{message}</AlertDescription>
+      {action && <AlertAction>{action}</AlertAction>}
+    </Alert>
+  )
+}
+
+function PageLayoutEmpty({
+  title,
+  description,
+  media,
+  content,
+}: {
+  title: string
+  description?: string
+  media?: ReactNode
+  content?: ReactNode
+}) {
+  return (
+    <Empty>
+      <EmptyHeader>
+        <EmptyTitle>{title}</EmptyTitle>
+        <EmptyDescription>{description}</EmptyDescription>
+      </EmptyHeader>
+      {!!content && <EmptyContent>{content}</EmptyContent>}
+      <EmptyMedia variant="icon">{media ?? <GhostIcon />}</EmptyMedia>
+    </Empty>
+  )
+}
 
 export const PageLayout = Object.assign(PageLayoutWrapper, {
   Header: PageLayoutHeader,
-  // Title: PageLayoutTitle,
   Content: PageLayoutContent,
   Toolbar: PageLayoutToolbar,
-  // Error: PageLayoutError,
-  // Empty: PageLayoutEmpty,
+  Error: PageLayoutError,
+  Empty: PageLayoutEmpty,
 })

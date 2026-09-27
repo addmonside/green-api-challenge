@@ -3,9 +3,9 @@
 * Do not edit manually.
 */
 
-import type { ChatListItem } from './ChatListItem'
+import type { ContactListItem } from './ContactListItem'
 
-export type GetChatsPath = {
+export type GetContactsPath = {
     /**
      * @description Идентификатор инстанса GREEN-API (из личного кабинета)
      * @type string
@@ -18,20 +18,20 @@ export type GetChatsPath = {
     apiTokenInstance: string;
 };
 
-export type GetChatsStatus200 = ChatListItem[];
+export type GetContactsStatus200 = ContactListItem[];
 
-export type GetChatsOptions = {
+export type GetContactsOptions = {
     body?: never;
-    path: GetChatsPath;
+    path: GetContactsPath;
     query?: never;
     headers?: never;
 };
 
-export type GetChatsResponses = {
-    "200": GetChatsStatus200;
+export type GetContactsResponses = {
+    "200": GetContactsStatus200;
 };
 
 /**
  * @description Union of all possible responses
 */
-export type GetChatsResponse = GetChatsStatus200;
+export type GetContactsResponse = GetContactsStatus200;

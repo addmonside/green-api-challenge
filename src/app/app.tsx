@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './app.css'
-import { Outlet, RouterProvider } from 'react-router'
+import { Outlet, RouterProvider, ScrollRestoration } from 'react-router'
 import { withProviders } from './providers'
 import { makeRouter } from './router'
 
@@ -14,6 +14,7 @@ if (!root) {
 const App = withProviders(() => (
   <>
     <div className="bg"></div>
+    <ScrollRestoration />
     <Outlet />
   </>
 ))

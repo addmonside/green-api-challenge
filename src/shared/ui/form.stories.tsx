@@ -33,33 +33,35 @@ function CredentialsForm({
 
   return (
     <Form form={form} className="flex w-full max-w-sm flex-col gap-4">
-      <Form.Field name="idInstance" label="idInstance">
-        {(field) => (
-          <Input
-            id={field.name}
-            value={field.state.value}
-            onChange={(event) => field.handleChange(event.target.value)}
-            onBlur={field.handleBlur}
-            placeholder="110000000001"
-            autoComplete="off"
-            aria-invalid={!field.state.meta.isValid}
-          />
-        )}
-      </Form.Field>
+      <Form.Group>
+        <Form.Field name="idInstance" label="idInstance">
+          {(field) => (
+            <Input
+              id={field.name}
+              value={field.state.value}
+              onChange={(event) => field.handleChange(event.target.value)}
+              onBlur={field.handleBlur}
+              placeholder="110000000001"
+              autoComplete="off"
+              aria-invalid={!field.state.meta.isValid}
+            />
+          )}
+        </Form.Field>
 
-      <Form.Field name="apiTokenInstance" label="apiTokenInstance">
-        {(field) => (
-          <Input
-            id={field.name}
-            value={field.state.value}
-            onChange={(event) => field.handleChange(event.target.value)}
-            onBlur={field.handleBlur}
-            placeholder="d75b3a66374942c5b3c019c698abc2067e151558acbd412345"
-            autoComplete="off"
-            aria-invalid={!field.state.meta.isValid}
-          />
-        )}
-      </Form.Field>
+        <Form.Field name="apiTokenInstance" label="apiTokenInstance">
+          {(field) => (
+            <Input
+              id={field.name}
+              value={field.state.value}
+              onChange={(event) => field.handleChange(event.target.value)}
+              onBlur={field.handleBlur}
+              placeholder="d75b3a66374942c5b3c019c698abc2067e151558acbd412345"
+              autoComplete="off"
+              aria-invalid={!field.state.meta.isValid}
+            />
+          )}
+        </Form.Field>
+      </Form.Group>
 
       <Form.Error title="Не удалось войти" />
 
