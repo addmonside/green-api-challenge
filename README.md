@@ -1,9 +1,5 @@
 # Чат для Telegram на GREEN-API HTTP API
 
-<p align="center">
-  <video src="https://raw.githubusercontent.com/addmonside/green-api-challenge/main/docs/preview.mp4" width="640" muted playsinline controls></video>
-</p>
-
 Веб-интерфейс для отправки и получения текстовых сообщений в мессенджере Telegram через
 [GREEN-API](https://green-api.com/telegram). Отправка — методом
 [SendMessage](https://green-api.com/v3/docs/api/sending/SendMessage/),
@@ -12,7 +8,7 @@
 (`ReceiveNotification` + `DeleteNotification`).
 
 Интерфейс повторяет чат [web.telegram.org](https://web.telegram.org/): переписка
-с пузырями сообщений. _(в задании был MAX, но у меня не было возможности проверять дизайн на соответствие, по этому выбрал Telegram)_
+с пузырями сообщений. _(в задании был MAX, но у меня не было возможности проверять дизайн на соответствие, поэтому выбрал Telegram)_
 
 ---
 
@@ -31,11 +27,11 @@
 
 ## Требования
 
-- [Node.js](https://nodejs.org/) 20+
+- [Node.js](https://nodejs.org/) 20.19+ (или 22.12+)
 - [pnpm](https://pnpm.io/)
-- аккаунт GREEN-API с инстансом, авторизованным в Telegtamm
-- macOS / Linux: утилита `mkcert` (ставится автоматически плагином, при первом запуске
-  попросит пароль администратора)
+- аккаунт GREEN-API с инстансом, авторизованным в Telegram
+- macOS / Linux: утилита `mkcert` _(ставится автоматически плагином, при первом запуске
+  попросит пароль администратора)_
 
 ---
 
@@ -69,7 +65,7 @@ pnpm dev
 
 Технология HTTP API работает через очередь уведомлений, а не через вебхуки. Чтобы
 `ReceiveNotification` начал отдавать сообщения, инстанс должен быть переключён в
-режим HTTP API. Это делается в личном кабинете (раздел «Настройки» → «Webhook»)
+режим HTTP API. Это делается в личном кабинете (раздел «Настройки» → «Webhook», подробнее в [документации](https://green-api.com/v3/docs/api/receiving/technology-http-api/#_1))
 или методом `SetSettings`:
 
 ```bash
@@ -130,17 +126,18 @@ curl -X POST \
 
 ## Скрипты
 
-| Команда          | Что делает                                                        |
-| ---------------- | ----------------------------------------------------------------- |
-| `pnpm dev`       | Dev-сервер на `https://localhost:3000` (HMR, проверка TS и Biome) |
-| `pnpm build`     | Продакшен-сборка: `tsc -b` + `vite build`                         |
-| `pnpm preview`   | Локальный просмотр продакшен-сборки                               |
-| `pnpm lint`      | Проверка кода (Biome)                                             |
-| `pnpm lint:fix`  | Автоисправление и форматирование                                  |
-| `pnpm format`    | Только форматирование                                             |
-| `pnpm gen:api`   | Перегенерация клиента и zod-схем GREEN-API из Postman-коллекции   |
-| `pnpm storybook` | Storybook на порту 6006                                           |
-| `pnpm vitest`    | Тесты: unit-проект в Node и тесты историй компонентов в браузере  |
+| Команда                | Что делает                                                        |
+| ---------------------- | ----------------------------------------------------------------- |
+| `pnpm dev`             | Dev-сервер на `https://localhost:3000` (HMR, проверка TS и Biome) |
+| `pnpm build`           | Продакшен-сборка: `tsc -b` + `vite build`                         |
+| `pnpm preview`         | Локальный просмотр продакшен-сборки                               |
+| `pnpm lint`            | Проверка кода (Biome)                                             |
+| `pnpm lint:fix`        | Автоисправление и форматирование                                  |
+| `pnpm format`          | Только форматирование                                             |
+| `pnpm gen:api`         | Перегенерация клиента и zod-схем GREEN-API из Postman-коллекции   |
+| `pnpm storybook`       | Storybook на порту 6006                                           |
+| `pnpm build-storybook` | Сборка статического Storybook                                     |
+| `pnpm vitest`          | Тесты: unit-проект в Node и тесты историй компонентов в браузере  |
 
 Для `pnpm vitest` нужен установленный браузер Playwright.
 
@@ -280,7 +277,7 @@ type(feature): description
 - [react router](https://reactrouter.com/) — роутинг
 - [tanstack query](https://tanstack.com/query/latest/) — работа с запросами и кэшем
 - [tanstack form](https://tanstack.com/form/latest) — состояние форм и валидация
-- [typescript](https://www.typescript.org/) — строгая типизация
+- [typescript](https://www.typescriptlang.org/) — строгая типизация
 - [vite](https://vitejs.dev/) — сборщик и dev-сервер
 - [tailwindcss](https://tailwindcss.com/) — утилитарный CSS
 - [shadcn](https://ui.shadcn.com/) / [base ui](https://base-ui.com/) — UI-кит
