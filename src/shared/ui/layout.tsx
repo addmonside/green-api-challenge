@@ -1,7 +1,7 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from 'cn'
 
-const layoutVariants = cva('@container/page-layout', {
+const layoutVariants = cva('', {
   variants: {
     variant: {
       default: 'min-h-svh flex flex-col',
@@ -20,7 +20,7 @@ export function Layout({
   children: React.ReactNode
 } & VariantProps<typeof layoutVariants>) {
   return (
-    <div className={cn(layoutVariants({ variant }))} data-slot="page-layout" data-variant={variant}>
+    <div className={cn(layoutVariants({ variant }))} data-slot="layout" data-variant={variant}>
       {children}
     </div>
   )

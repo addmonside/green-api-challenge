@@ -32,7 +32,7 @@ function usePageLayout() {
   return context
 }
 
-const pageLayoutVariants = cva('@container/page-layout', {
+const pageLayoutVariants = cva('', {
   variants: {
     variant: {
       default: 'flex w-full flex-1 flex-col pb-15',
