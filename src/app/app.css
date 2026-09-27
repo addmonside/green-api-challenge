@@ -80,7 +80,7 @@
   --bubble-out: oklch(0.945 0.028 248.12); /* #DFEFFF фон исходящего сообщения (light) */
   --bubble-out-foreground: oklch(0.321 0 0); /* #333333, текст тёмный на светлом фоне */
   --border: oklch(0.909 0.006 264.531); /* #DFE1E5 border-color */
-  --input: oklch(1 0 0); /* #FFFFFF surface-color */
+  --input: oklch(0.955 0 0);
   --ring: oklch(0.589 0.154 253.336); /* = primary, фокус-кольцо */
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
@@ -128,7 +128,7 @@
   --bubble-out: var(--primary); /* в dark исходящий = сплошной primary #8774e1 */
   --bubble-out-foreground: var(--primary-foreground);
   --border: oklch(0.168 0 0); /* #0f0f0f border-color */
-  --input: oklch(0.248 0 0); /* #212121 surface-color */
+  --input: oklch(0.371 0 0);
   --ring: oklch(0.627 0.159 288.963);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
