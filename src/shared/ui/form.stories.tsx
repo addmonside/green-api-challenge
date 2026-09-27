@@ -62,10 +62,10 @@ function CredentialsForm({
           )}
         </Form.Field>
       </Form.Group>
-
       <Form.Error title="Не удалось войти" />
-
-      <Form.Submit pendingLabel="Подключение…">Войти</Form.Submit>
+      <Form.Actions>
+        <Form.Submit pendingLabel="Подключение…">Войти</Form.Submit>
+      </Form.Actions>
     </Form>
   )
 }

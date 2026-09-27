@@ -30,7 +30,9 @@ export function ChatListForm() {
               </Form.Field>
             </Form.Group>
             <Form.Error title="Не удалось открыть чат" />
-            <Form.Submit pendingLabel="Открытие…">Открыть</Form.Submit>
+            <Form.Actions>
+              <Form.Submit pendingLabel="Открытие…">Открыть</Form.Submit>
+            </Form.Actions>
           </Form>
         </CardContent>
       </Card>
