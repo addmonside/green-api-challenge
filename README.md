@@ -1,5 +1,9 @@
 # Чат для Telegram на GREEN-API HTTP API
 
+<p align="center">
+  <video src="docs/preview.mp4" width="640" muted playsinline controls></video>
+</p>
+
 Веб-интерфейс для отправки и получения текстовых сообщений в мессенджере Telegram через
 [GREEN-API](https://green-api.com/telegram). Отправка — методом
 [SendMessage](https://green-api.com/v3/docs/api/sending/SendMessage/),
@@ -7,7 +11,7 @@
 [HTTP API](https://green-api.com/v3/docs/api/receiving/technology-http-api/)
 (`ReceiveNotification` + `DeleteNotification`).
 
-Интерфейс повторяет чат [web.telegram.org](https://web.telegram.org/): список чатов и переписка
+Интерфейс повторяет чат [web.telegram.org](https://web.telegram.org/): переписка
 с пузырями сообщений. _(в задании был MAX, но у меня не было возможности проверять дизайн на соответствие, по этому выбрал Telegram)_
 
 ---
@@ -21,7 +25,7 @@
 - разделители и метки времени, состояние «контакт был(а) только что / минуты назад»
 
 Клиент и валидаторы к GREEN-API генерируются из Postman-коллекции
-(`pnpm gen:api`), хенд-written схемы лежат в `scripts/postman-to-openapi.mjs`.
+(`pnpm gen:api`), через скрипт `scripts/postman-to-openapi.mjs`.
 
 ---
 
