@@ -555,6 +555,24 @@
         },
         "required": ["textMessage"]
       },
+      "NotificationExtendedTextMessageData": {
+        "type": "object",
+        "properties": {
+          "textMessage": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "previewLink": {
+            "type": "string"
+          }
+        },
+        "required": ["textMessage"]
+      },
       "NotificationMessageData": {
         "type": "object",
         "properties": {
@@ -563,6 +581,9 @@
           },
           "textMessageData": {
             "$ref": "#/components/schemas/NotificationTextMessageData"
+          },
+          "extendedTextMessageData": {
+            "$ref": "#/components/schemas/NotificationExtendedTextMessageData"
           }
         },
         "required": ["typeMessage"]

@@ -4,9 +4,11 @@
 */
 
 import * as z from 'zod'
+import { notificationExtendedTextMessageDataSchema } from './notificationExtendedTextMessageDataSchema'
 import { notificationTextMessageDataSchema } from './notificationTextMessageDataSchema'
 
 export const notificationMessageDataSchema = z.object({
   typeMessage: z.string(),
   textMessageData: notificationTextMessageDataSchema.optional(),
+  extendedTextMessageData: notificationExtendedTextMessageDataSchema.optional(),
 })

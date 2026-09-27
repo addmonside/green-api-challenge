@@ -14,11 +14,22 @@ export type ChatMessage = {
 
 const textMessageWebhook = 'incomingMessageReceived'
 const textMessageType = 'textMessage'
+// Текст со ссылкой GREEN-API присылает отдельным типом messageData.
+const extendedTextMessageType = 'extendedTextMessage'
+
+// Текст лежит в разных полях в зависимости от typeMessage, поэтому тип проверяем явно:
+// иначе не-text сообщения проходили бы валидацию схемы и молча терялись бы в чате.
+const getNotificationText = (body: NotificationBody) => {
+  const { typeMessage, textMessageData, extendedTextMessageData } = body.messageData ?? {}
+  if (typeMessage === textMessageType) return textMessageData?.textMessage
+  if (typeMessage === extendedTextMessageType) return extendedTextMessageData?.textMessage
+  return undefined
+}
 
 export const toMessageFromNotification = (body: NotificationBody): ChatMessage | undefined => {
   if (body.typeWebhook !== textMessageWebhook) return undefined
   const chatId = body.senderData?.chatId
-  const text = body.messageData?.textMessageData?.textMessage
+  const text = getNotificationText(body)
   if (!chatId || !text || !body.idMessage) return undefined
   return {
     id: body.idMessage,

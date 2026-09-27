@@ -102,11 +102,25 @@ const schemas = {
     },
     required: ['textMessage'],
   },
+  // Текст, содержащий ссылку, GREEN-API присылает отдельным типом messageData.
+  NotificationExtendedTextMessageData: {
+    type: 'object',
+    properties: {
+      textMessage: { type: 'string' },
+      title: { type: 'string' },
+      description: { type: 'string' },
+      previewLink: { type: 'string' },
+    },
+    required: ['textMessage'],
+  },
   NotificationMessageData: {
     type: 'object',
     properties: {
       typeMessage: { type: 'string' },
       textMessageData: { $ref: '#/components/schemas/NotificationTextMessageData' },
+      extendedTextMessageData: {
+        $ref: '#/components/schemas/NotificationExtendedTextMessageData',
+      },
     },
     required: ['typeMessage'],
   },

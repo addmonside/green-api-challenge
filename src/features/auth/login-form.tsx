@@ -14,7 +14,7 @@ export function LoginForm() {
               value={field.state.value}
               onChange={(event) => field.handleChange(event.target.value)}
               onBlur={field.handleBlur}
-              placeholder="1100000001"
+              placeholder="410011747511"
               autoComplete="on"
               aria-invalid={!field.state.meta.isValid}
             />

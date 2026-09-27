@@ -68,6 +68,35 @@ describe('toMessageFromNotification', () => {
     ).toBeUndefined()
   })
 
+  it('takes the text of a message containing a link (extendedTextMessage)', () => {
+    expect(
+      toMessageFromNotification(
+        notification({
+          messageData: {
+            typeMessage: 'extendedTextMessage',
+            extendedTextMessageData: {
+              textMessage: 'Глянь https://green-api.com',
+              previewLink: 'https://green-api.com',
+            },
+          },
+        }),
+      ),
+    ).toMatchObject({ text: 'Глянь https://green-api.com' })
+  })
+
+  it('ignores an extendedTextMessage with empty text', () => {
+    expect(
+      toMessageFromNotification(
+        notification({
+          messageData: {
+            typeMessage: 'extendedTextMessage',
+            extendedTextMessageData: { textMessage: '' },
+          },
+        }),
+      ),
+    ).toBeUndefined()
+  })
+
   it('ignores notifications without idMessage', () => {
     expect(toMessageFromNotification(notification({ idMessage: undefined }))).toBeUndefined()
   })

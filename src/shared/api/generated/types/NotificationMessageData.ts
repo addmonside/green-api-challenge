@@ -3,9 +3,11 @@
 * Do not edit manually.
 */
 
+import type { NotificationExtendedTextMessageData } from './NotificationExtendedTextMessageData'
 import type { NotificationTextMessageData } from './NotificationTextMessageData'
 
 export type NotificationMessageData = {
     typeMessage: string;
     textMessageData?: NotificationTextMessageData;
+    extendedTextMessageData?: NotificationExtendedTextMessageData;
 };

@@ -11,6 +11,7 @@ export type { GetContactInfoBody, GetContactInfoOptions, GetContactInfoPath, Get
 export type { GetContactInfoRequest } from './GetContactInfoRequest'
 export type { GetContactsOptions, GetContactsPath, GetContactsResponse, GetContactsResponses, GetContactsStatus200 } from './GetContacts'
 export type { NotificationBody } from './NotificationBody'
+export type { NotificationExtendedTextMessageData } from './NotificationExtendedTextMessageData'
 export type { NotificationInstanceData } from './NotificationInstanceData'
 export type { NotificationMessageData } from './NotificationMessageData'
 export type { NotificationSenderData } from './NotificationSenderData'
