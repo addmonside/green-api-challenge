@@ -3,17 +3,14 @@ import { useGetContacts } from '@/shared/api/generated/hooks'
 import { useCredentials } from '@/shared/model'
 
 export const useContacts = () => {
-  const { credentials } = useCredentials()
+  const { credentials, isEmpty } = useCredentials()
   return useGetContacts(
     {
-      path: {
-        idInstance: credentials?.idInstance ?? '',
-        apiTokenInstance: credentials?.apiTokenInstance ?? '',
-      },
+      path: credentials,
     },
     {
       client: apiClientConfig,
-      query: { enabled: Boolean(credentials) },
+      query: { enabled: !isEmpty },
     },
   )
 }

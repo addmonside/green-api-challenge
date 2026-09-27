@@ -7,7 +7,7 @@ import { toOutgoingMessage } from './message-converter'
 import { appendMessage } from './message-list-cache'
 
 export const useSendMessage = (chatId: string) => {
-  const { credentials } = useCredentials()
+  const { credentials, isEmpty } = useCredentials()
   const queryClient = useQueryClient()
 
   const mutation = useSendMessageMutation<unknown>({
@@ -26,14 +26,8 @@ export const useSendMessage = (chatId: string) => {
   })
 
   const sendMessage = (text: string) => {
-    if (!credentials) return
-    mutation.mutate({
-      path: {
-        idInstance: credentials.idInstance,
-        apiTokenInstance: credentials.apiTokenInstance,
-      },
-      body: { chatId, message: text },
-    })
+    if (isEmpty) return
+    mutation.mutate({ path: credentials, body: { chatId, message: text } })
   }
 
   return { sendMessage, isPending: mutation.isPending, error: mutation.error }

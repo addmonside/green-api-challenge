@@ -2,9 +2,9 @@ import { Navigate, Outlet } from 'react-router'
 import { routes, useCredentials } from '@/shared/model'
 
 export function RouterAuthGuard() {
-  const { credentials } = useCredentials()
+  const { isEmpty } = useCredentials()
 
-  if (credentials) return <Navigate to={routes.CHAT_LIST} replace />
+  if (!isEmpty) return <Navigate to={routes.CHAT_LIST} replace />
 
   return <Outlet />
 }

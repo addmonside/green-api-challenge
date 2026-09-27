@@ -8,11 +8,11 @@ import { appendMessage } from './message-list-cache'
 import { MessageNotificationService } from './message-notification-service'
 
 export const useMessageNotificationPoller = (chatId: string) => {
-  const { credentials, signOut } = useCredentials()
+  const { credentials, isEmpty, signOut } = useCredentials()
   const queryClient = useQueryClient()
 
   useEffect(() => {
-    if (!credentials) return
+    if (isEmpty) return
 
     const handleNotification = (notification: ReceiveNotificationResponse) => {
       const message = toMessageFromNotification(notification.body)
@@ -30,5 +30,5 @@ export const useMessageNotificationPoller = (chatId: string) => {
     void service.poll(handleNotification, handleError) // ! намеренно игнорируемый промис (реджектов не будет — всё ловится внутри poll)
 
     return () => service.abort()
-  }, [credentials, queryClient, chatId, signOut])
+  }, [credentials, isEmpty, queryClient, chatId, signOut])
 }

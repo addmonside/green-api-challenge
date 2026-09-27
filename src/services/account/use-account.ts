@@ -3,15 +3,12 @@ import { useGetAccountSettings } from '@/shared/api/generated/hooks'
 import { useCredentials } from '@/shared/model'
 
 export const useAccount = () => {
-  const { credentials } = useCredentials()
+  const { credentials, isEmpty } = useCredentials()
 
   return useGetAccountSettings(
     {
-      path: {
-        idInstance: credentials?.idInstance || '',
-        apiTokenInstance: credentials?.apiTokenInstance || '',
-      },
+      path: credentials,
     },
-    { client: apiClientConfig, query: { staleTime: Infinity, enabled: !!credentials } },
+    { client: apiClientConfig, query: { staleTime: Infinity, enabled: !isEmpty } },
   )
 }

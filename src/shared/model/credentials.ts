@@ -1,5 +1,6 @@
 import { createContext, use } from 'react'
 import { z } from 'zod'
+import { appConfig } from './app-config'
 
 export const credentialsSchema = z.object({
   idInstance: z
@@ -17,38 +18,46 @@ export const credentialsSchema = z.object({
 })
 
 export type Credentials = z.infer<typeof credentialsSchema>
+export const emptyCredentials = {
+  credentials: {
+    idInstance: '',
+    apiTokenInstance: '',
+  },
+  signIn: () => {},
+  signOut: () => {},
+}
 
-export const credentialsStorageKey = 'green-api:credentials'
-
-export const readCredentials = (): Credentials | null => {
-  const stored = localStorage.getItem(credentialsStorageKey)
-  if (!stored) return null
+export const readCredentials = (): Credentials => {
+  const stored = localStorage.getItem(appConfig.credentialsStorageKey)
+  if (!stored) return emptyCredentials.credentials
   try {
     const parsed = credentialsSchema.safeParse(JSON.parse(stored))
-    return parsed.success ? parsed.data : null
+    return parsed.success ? parsed.data : emptyCredentials.credentials
   } catch {
-    return null
+    return emptyCredentials.credentials
   }
 }
 
 export const writeCredentials = (credentials: Credentials) => {
-  localStorage.setItem(credentialsStorageKey, JSON.stringify(credentials))
+  localStorage.setItem(appConfig.credentialsStorageKey, JSON.stringify(credentials))
 }
 
 export const clearCredentials = () => {
-  localStorage.removeItem(credentialsStorageKey)
+  localStorage.removeItem(appConfig.credentialsStorageKey)
 }
 
 export type CredentialsContextValue = {
-  credentials: Credentials | null
+  credentials: Credentials
   signIn: (credentials: Credentials) => void
   signOut: () => void
 }
 
-export const CredentialsContext = createContext<CredentialsContextValue | null>(null)
+export const CredentialsContext = createContext<CredentialsContextValue>(emptyCredentials)
 
 export const useCredentials = () => {
   const value = use(CredentialsContext)
-  if (!value) throw new Error('useCredentials must be used within CredentialsProvider')
-  return value
+  // isEmpty вычисляется, а не хранится в провайдере, поэтому не может
+  // разойтись с credentials. Вне провайдера сработает credentialsNull.
+  const isEmpty = value.credentials.idInstance === '' && value.credentials.apiTokenInstance === ''
+  return { ...emptyCredentials, ...value, isEmpty }
 }

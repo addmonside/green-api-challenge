@@ -3,18 +3,15 @@ import { useGetContactInfo } from '@/shared/api/generated/hooks'
 import { useCredentials } from '@/shared/model'
 
 export const useContactInfo = (chatId: string) => {
-  const { credentials } = useCredentials()
+  const { credentials, isEmpty } = useCredentials()
   return useGetContactInfo(
     {
-      path: {
-        idInstance: credentials?.idInstance ?? '',
-        apiTokenInstance: credentials?.apiTokenInstance ?? '',
-      },
+      path: credentials,
       body: { chatId },
     },
     {
       client: apiClientConfig,
-      query: { enabled: Boolean(credentials) },
+      query: { enabled: !isEmpty },
     },
   )
 }

@@ -8,4 +8,5 @@ export const appConfig = {
     refetchOnWindowFocus: false,
   },
   messagePullingRetryDelay: 3000,
+  credentialsStorageKey: 'green-api-credentials',
 } as const

@@ -3,12 +3,13 @@ import {
   type Credentials,
   CredentialsContext,
   clearCredentials,
+  emptyCredentials,
   readCredentials,
   writeCredentials,
 } from '@/shared/model'
 
 export function CredentialsProvider({ children }: { children: React.ReactNode }) {
-  const [credentials, setCredentials] = useState<Credentials | null>(readCredentials)
+  const [credentials, setCredentials] = useState<Credentials>(readCredentials)
 
   const signIn = useCallback((nextCredentials: Credentials) => {
     writeCredentials(nextCredentials)
@@ -17,7 +18,7 @@ export function CredentialsProvider({ children }: { children: React.ReactNode })
 
   const signOut = useCallback(() => {
     clearCredentials()
-    setCredentials(null)
+    setCredentials(emptyCredentials.credentials)
   }, [])
 
   const value = useMemo(() => ({ credentials, signIn, signOut }), [credentials, signIn, signOut])

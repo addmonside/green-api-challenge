@@ -18,7 +18,7 @@ const getRecipientError = (response: CheckAccountStatus200) => {
 
 export function useChatListForm() {
   const navigate = useNavigate()
-  const { credentials } = useCredentials()
+  const { credentials, isEmpty } = useCredentials()
 
   const form = useForm({
     defaultValues: { recipient: '' },
@@ -26,7 +26,7 @@ export function useChatListForm() {
       onSubmit: chatRecipientSchema,
     },
     onSubmit: async ({ value }) => {
-      if (!credentials) return
+      if (isEmpty) return
       try {
         const response = await checkContact(credentials, Number(value.recipient.trim()))
         const recipientError = getRecipientError(response)

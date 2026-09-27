@@ -7,15 +7,14 @@ import { messagesQueryKey } from './message-list-cache'
 const historyCount = 100
 
 export const useMessageList = (chatId: string) => {
-  const { credentials } = useCredentials()
+  const { credentials, isEmpty } = useCredentials()
   return useQuery({
     queryKey: messagesQueryKey(chatId),
     queryFn: async ({ signal }) => {
-      if (!credentials) throw new Error('No credentials')
       const history = await getChatHistory(credentials, { chatId, count: historyCount }, signal)
       return toMessagesFromHistory(history)
     },
-    enabled: Boolean(credentials),
+    enabled: !isEmpty,
     staleTime: Infinity,
     structuralSharing: (current, next) =>
       mergeMessages((current as ChatMessage[] | undefined) ?? [], next as ChatMessage[]),
