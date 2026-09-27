@@ -93,6 +93,14 @@ export default defineConfig({
           name: 'unit',
           include: ['src/**/*.test.ts'],
           environment: 'node',
+          // app-config читает import.meta.env на уровне модуля, поэтому без
+          // .env его импорт падает. Тесты задают переменные явно, чтобы не
+          // зависеть от локального файла разработчика.
+          env: {
+            VITE_API_URL: 'https://4100.api.green-api.com',
+            VITE_RECEIVE_TIMEOUT: '5',
+            VITE_DEVTOOLS_ENABLED: 'false',
+          },
         },
       },
       {
