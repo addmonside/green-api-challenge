@@ -38,3 +38,7 @@ dist-ssr
 /opencode*
 /.agents
 /skills-*
+AGENTS.md
+
+*storybook.log
+storybook-static

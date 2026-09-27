@@ -7,7 +7,7 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "includes": ["**", "!public", "!**/public"]
+    "includes": ["**", "!public", "!**/public", "!src/shared/api/generated"]
   },
   "formatter": {
     "enabled": true,
@@ -18,13 +18,21 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "preset": "recommended"
+      "preset": "recommended",
+      "a11y": {
+        "noSvgWithoutTitle": "off"
+      }
     }
   },
   "javascript": {
     "formatter": {
       "quoteStyle": "single",
       "semicolons": "asNeeded"
+    }
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
     }
   }
 }

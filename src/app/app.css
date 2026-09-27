@@ -1,109 +1,217 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/roboto";
+@import "@fontsource-variable/roboto-mono";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans:
+    "Roboto Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", Oxygen-Sans, Ubuntu,
+    Cantarell, "Helvetica Neue", sans-serif;
+  --font-mono: "Roboto Mono Variable", "SF Mono", Menlo, Consolas, monospace;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-bubble-out: var(--bubble-out);
+  --color-bubble-out-foreground: var(--bubble-out-foreground);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --color-action-message: var(--action-message);
+  --color-action-message-foreground: var(--action-message-foreground);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --background: oklch(1 0 0); /* #FFFFFF body-background-color */
+  --foreground: oklch(0.321 0 0); /* #333333 primary-text-color */
+  --card: oklch(1 0 0); /* #FFFFFF surface-color */
+  --card-foreground: oklch(0.321 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.321 0 0);
+  --primary: oklch(0.589 0.154 253.336); /* #2d7ed5 primary-color */
+  --primary-hover: oklch(0.56 0.15 253.5); /* #2874c6 primary-color */
+  --primary-foreground: oklch(1 0 0); /* #FFFFFF message-out-primary-color */
+  --secondary: oklch(0.955 0 0); /* #F0F0F0 message-background-color */
+  --secondary-foreground: oklch(0.321 0 0);
+  --muted: oklch(0.967 0.001 286.375); /* #F4F4F5 background-color */
+  --muted-foreground: oklch(0.646 0.005 258.332); /* #8C8E91 secondary-text-color */
+  --accent: oklch(0.965 0.011 252.088); /* #EEF4FB light-filled-primary-color */
+  --accent-foreground: oklch(0.589 0.154 253.336);
+  --destructive: oklch(0.605 0.197 25.004); /* #DF3F40 danger-color */
+  --success: oklch(0.648 0.199 145.672); /* #04AC35 green-color (кастомный токен) */
+  --success-foreground: oklch(1 0 0);
+  --bubble-out: oklch(0.945 0.028 248.12); /* #DFEFFF фон исходящего сообщения (light) */
+  --bubble-out-foreground: oklch(0.321 0 0); /* #333333, текст тёмный на светлом фоне */
+  --border: oklch(0.909 0.006 264.531); /* #DFE1E5 border-color */
+  --input: oklch(0.955 0 0);
+  --ring: oklch(0.589 0.154 253.336); /* = primary, фокус-кольцо */
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.321 0 0);
+  --sidebar-primary: oklch(0.589 0.154 253.336);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.965 0.011 252.088);
+  --sidebar-accent-foreground: oklch(0.589 0.154 253.336);
+  --sidebar-border: oklch(0.909 0.006 264.531);
+  --sidebar-ring: oklch(0.589 0.154 253.336);
+  /* Градиент фона чата — 4 стопа, взят из настроек фона Telegram (data-colors на GradientCanvas) */
+  --bg-gradient-1: oklch(0.878 0.057 228.5); /* #b1e0fa */
+  --bg-gradient-2: oklch(0.734 0.081 240.1); /* #82b0d8 */
+  --bg-gradient-3: oklch(0.847 0.071 227.9); /* #a0d8e8 */
+  --bg-gradient-4: oklch(0.951 0.019 235.7); /* #e5f0f8 */
+  --bg-vignette: rgba(0, 0, 0, 0.12); /* лёгкое затемнение центра для light */
+  --bg-mask-opacity: 0.06;
+  --action-message: #005c8766;
+  --action-message-foreground: oklch(1 0 0);
+}
 
-  --sans: system-ui, "Segoe UI", Roboto, sans-serif;
-  --heading: system-ui, "Segoe UI", Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+.dark {
+  --background: oklch(0.209 0 0); /* #181818 body-background-color */
+  --foreground: oklch(1 0 0); /* #FFFFFF primary-text-color */
+  --card: oklch(0.248 0 0); /* #212121 surface-color */
+  --card-foreground: oklch(1 0 0);
+  --popover: oklch(0.248 0 0);
+  --popover-foreground: oklch(1 0 0);
+  --primary: oklch(0.627 0.159 288.963); /* #8774e1 primary-color */
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.248 0 0); /* #212121 message-background-color */
+  --secondary-foreground: oklch(1 0 0);
+  --muted: oklch(0.209 0 0); /* #181818 background-color */
+  --muted-foreground: oklch(0.738 0 0); /* #AAAAAA secondary-text-color */
+  --accent: oklch(0.279 0.017 295.487); /* #292730 light-filled-primary-color */
+  --accent-foreground: oklch(0.627 0.159 288.963);
+  --destructive: oklch(0.687 0.202 23.805); /* #ff595a danger-color */
+  --success: oklch(0.745 0.176 143.879); /* #5CC85E green-color */
+  --success-foreground: oklch(0.209 0 0);
+  --bubble-out: var(--primary); /* в dark исходящий = сплошной primary #8774e1 */
+  --bubble-out-foreground: var(--primary-foreground);
+  --border: oklch(0.168 0 0); /* #0f0f0f border-color */
+  --input: oklch(0.371 0 0);
+  --ring: oklch(0.627 0.159 288.963);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.248 0 0);
+  --sidebar-foreground: oklch(1 0 0);
+  --sidebar-primary: oklch(0.627 0.159 288.963);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.279 0.017 295.487);
+  --sidebar-accent-foreground: oklch(0.627 0.159 288.963);
+  --sidebar-border: oklch(0.168 0 0);
+  --sidebar-ring: oklch(0.627 0.159 288.963);
+  /* Градиент фона чата (dark) */
+  --bg-gradient-1: oklch(0.526 0.174 288.347); /* #6a52c7 */
+  --bg-gradient-2: oklch(0.414 0.135 287.661); /* #4a3a8f */
+  --bg-gradient-3: oklch(0.29 0.079 287.527); /* #2a2350 */
+  --bg-gradient-4: oklch(0.198 0.06 290.265); /* #160f2e, почти чёрный */
+  --bg-vignette: rgba(0, 0, 0, 0.4); /* в dark затемнение центра заметнее */
+  --bg-mask-opacity: 0.03;
+  --action-message: #48576166;
+  --action-message-foreground: oklch(1 0 0);
+}
 
-  font: 18px / 145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+  html {
+    @apply font-sans;
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow: rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+.bg {
+  z-index: -1;
+  position: fixed;
+  inset: 0;
+  /*background-color: var(--background); /* подложка */
+  background:
+    radial-gradient(circle at center, var(--bg-vignette) 0%, transparent 65%),
+    linear-gradient(
+      45deg,
+      var(--bg-gradient-1) 0%,
+      var(--bg-gradient-2) 33%,
+      var(--bg-gradient-3) 66%,
+      var(--bg-gradient-4) 100%
+    );
+}
+.bg::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-color: var(--foreground);
+  opacity: var(--bg-mask-opacity);
+  -webkit-mask-image: url("/src/shared/assets/icons/pattern-14.svg");
+  mask-image: url("/src/shared/assets/icons/pattern-14.svg");
+  -webkit-mask-repeat: repeat;
+  mask-repeat: repeat;
+  -webkit-mask-size: 375px 812px;
+  mask-size: 375px 812px;
 }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
+/*autofill*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  /* Растягиваем анимацию смены цвета на ~1,4 часа */
+  transition: background-color 5000s ease-in-out 0s;
 
-body {
-  margin: 0;
+  /* Важно: без этого текст может стать невидимым */
+  -webkit-text-fill-color: var(--foreground); /* Или ваш цвет текста */
 }
-
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+input:-webkit-autofill {
+  -webkit-text-fill-color: var(--foreground);
+  /* Создаем огромную внутреннюю тень, чтобы перекрыть фон браузера */
+  -webkit-box-shadow: 0 0 0 1000px transparent inset;
+  background-clip: content-box;
 }
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
-}
-
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
-
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+input:-moz-autofill {
+  background-color: transparent;
 }

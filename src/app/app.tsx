@@ -1,9 +1,9 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './app.css'
-import { Outlet, RouterProvider } from 'react-router'
-import { makeRouter } from './router'
+import { Outlet, RouterProvider, ScrollRestoration } from 'react-router'
 import { withProviders } from './providers'
+import { makeRouter } from './router'
 
 const root = document.getElementById('root')
 
@@ -11,7 +11,13 @@ if (!root) {
   throw new Error('Root element "#root" not found')
 }
 
-const App = withProviders(() => <Outlet />)
+const App = withProviders(() => (
+  <>
+    <div className="bg"></div>
+    <ScrollRestoration />
+    <Outlet />
+  </>
+))
 
 createRoot(root).render(
   <StrictMode>

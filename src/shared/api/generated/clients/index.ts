@@ -1,0 +1,8 @@
+export { checkAccount } from './checkAccount'
+export { deleteNotification } from './deleteNotification'
+export { getAccountSettings } from './getAccountSettings'
+export { getChatHistory } from './getChatHistory'
+export { getContactInfo } from './getContactInfo'
+export { getContacts } from './getContacts'
+export { receiveNotification } from './receiveNotification'
+export { sendMessage } from './sendMessage'
